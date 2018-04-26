@@ -11,10 +11,10 @@
                     ng-click="handUp()" ng-if="user && user.id">
                 <span ng-show="room.type =='G011'">开始</span>
                 <span ng-show="room.type =='G04'"></span>
-                 <span ng-show="room.type =='G42'"></span>
-                   <span ng-show="room.type =='G43'"></span>
-                     <span ng-show="room.type =='G45'"></span>
-                       <span ng-show="room.type =='G46'"></span>
+                <span ng-show="room.type =='G42'"></span>
+                <span ng-show="room.type =='G43'"></span>
+                <span ng-show="room.type =='G45'"></span>
+                <span ng-show="room.type =='G46'"></span>
                 <span ng-show="room.type !='G011' && room.type!= 'G04' && room.type!= 'G42' && room.type!= 'G43'&& room.type!= 'G45'&& room.type!= 'G46'">抢庄</span>
             </button>
             <button class="button button-icon icon ion-navicon" ng-click="openRoomMenu($event)"
@@ -33,7 +33,8 @@
         <div class="room-menu" ng-style="menuStyle">
             <ul>
                 <li class="room-menu-item" ng-click="gotoAccount()">
-                    <i class="ion-person room-menu-icon"></i>我的账户<span style="font-size:11px">(<span style="color:greenyellow">金币</span>
+                    <i class="ion-person room-menu-icon"></i>我的账户<span style="font-size:11px">(<span
+                        style="color:greenyellow">金币</span>
                     <span style="color:red">{{balance ? balance : '...'}}</span>)</span>
                 </li>
                 <li class="room-menu-item" ng-click="openMembersModal()">
@@ -42,7 +43,7 @@
                 <li class="room-menu-item" ng-click="openDescModal()">
                     <i class="ion-ios-game-controller-b room-menu-icon"></i>游戏说明
                 </li>
-                 <li class="room-menu-item room-link" data-clipboard-target="#roomLink">
+                <li class="room-menu-item room-link" data-clipboard-target="#roomLink">
                     <i class="ion-ios-copy room-menu-icon"></i>邀请链接
                 </li>
             </ul>
@@ -88,28 +89,29 @@
                         </div>
                     </div>
                 </div>
-                <span class="chat-triangle-right" ng-if="item.align=='right'" ng-class="{'lottery':item.lottery}"></span>
+                <span class="chat-triangle-right" ng-if="item.align=='right'"
+                      ng-class="{'lottery':item.lottery}"></span>
             </ion-item>
         </ion-list>
     </ion-content>
     <ion-footer-bar keyboard-attach ng-class="{'kb-open': emojiOpen}">
         <div class="buttons">
-             <button class="button button-icon icon ion-arrow-left-c" ng-click="back()"></button>
-            
+            <button class="button button-icon icon ion-arrow-left-c" ng-click="back()"></button>
+
             </button>
         </div>
-        <div class="title msg-input" style="right: 40px; left: 33px;}">
+        <div class="title msg-input" style="right: 98px; left: 58px;}">
             <input id="chatMsgInput" class="chat-input" ng-model="content" ng-click="closeEmojiBoard($event)"
                    ng-keydown="keyEnter($event)">
         </div>
         <div class="buttons">
-           <!--  <button class="button button-icon icon ion-happy-outline" ng-click="toggleEmojiBoard()"
-            ng-disabled="user.id == null || user.id == undefined"></button> -->
+            <!--<button class="button button-icon icon ion-happy-outline" ng-click="toggleEmojiBoard()"-->
+             <!--ng-disabled="user.id == null || user.id == undefined"></button>-->
             <button class="button button-icon icon ion-paper-airplane" ng-click="send()"></button>
-			<button class="button button-icon icon ion-ios-plus-outline" ng-click="openModal($event)">
+            <button class="button button-icon icon ion-ios-plus-outline" ng-click="openModal($event)">
         </div>
     </ion-footer-bar>
     <div class="emoji-board" ng-class="{'kb-close': !emojiOpen}">
-    <i class="emoji" ng-repeat="emoji in emojiList" ng-bind="emoji" ng-click="insertEmoji(emoji)"></i>
+        <i class="emoji" ng-repeat="emoji in emojiList" ng-bind="emoji" ng-click="insertEmoji(emoji)"></i>
     </div>
 </ion-view>

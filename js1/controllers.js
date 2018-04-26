@@ -1,4 +1,3 @@
-
 // ImaxGame游戏社区
 //支持正版，授权冲突，格式化系统，后果自负。
 //iMax游戏爱好者全网独家提供 盗版必究 本代码仅限学习和研究使用 禁止非法用途 责任自负 与本站无关 禁止任何形式的转卖和再分发 监控自动删除
@@ -9,279 +8,255 @@ angular.module('starter.controllers', [])
     .controller('HistoryCtrl', function () {
 
     })
-	
-	.controller('TabsCtrl', function ($state, $rootScope, $scope,Auth) {
+
+    .controller('TabsCtrl', function ($state, $rootScope, $scope, Auth) {
         Auth.isSignIn();
-        $scope.goAccount = function(){
+        $scope.goAccount = function () {
             $rootScope.accountRouteFromRoom = false;
             $rootScope.accountRouteFromRoomId = null;
             $state.go('tab.account');
         }
     })
-  .controller('AccountProxyPromoteCtrl', function ($scope,$state,$stateParams,$sce) {
-	  
-	  $scope.qr_img=qr_img;
+    .controller('AccountProxyPromoteCtrl', function ($scope, $state, $stateParams, $sce) {
+
+        $scope.qr_img = qr_img;
 
     })
- .controller('AccountUrlCtrl', function ($scope,$state,$stateParams,$sce,UserService) {
-  $scope.jumpurl="";	  
-  $scope.$on('$ionicView.beforeEnter', function ()
-  {
-		  
-		  
-	  UserService.getjumpurl().then(function (res) {
-          if (200 == res.code) {
-       
-         	 $scope.jumpurl= res.msg;
-        	   
-        
-          } else {
-              
-          }
-      });  
-		  
-		  
-		  
- });
+    .controller('AccountUrlCtrl', function ($scope, $state, $stateParams, $sce, UserService) {
+        $scope.jumpurl = "";
+        $scope.$on('$ionicView.beforeEnter', function () {
+            UserService.getjumpurl().then(function (res) {
+                if (200 == res.code) {
+                    $scope.jumpurl = res.msg;
+                } else {
+                }
+            });
 
-  })
-  .controller('AccountProxyPromoteQrcodeCtrl', function ($scope,$state,$stateParams,$sce,UserService) {		 
 
-	 
-	  $scope.qrcodesrc="";
-	  $scope.$on('$ionicView.beforeEnter', function () {
-    
-	 	  var qr = $stateParams.qr;
-	 	 
-	 	  
-	 	 UserService.getPromoteQrcode("img="+qr.img+"&qrsize="+qr.qrsize+"&x="+qr.x+"&y="+qr.y).then(function (res) {
-             if (200 == res.code) {
-          	 //  alert(res.body.imgsrc);
-            	 $scope.qrcodesrc= "/img/promote"+res.msg;
-           	   
-           
-             } else {
-                 
-             }
-         });
-	 	 
-	 	 
-	// 	 $scope.qrcodesrc= "/user/getPromoteQrcode?img="+qr.img+"&qrsize="+qr.qrsize+"&x="+qr.x+"&y="+qr.y;
-		   
-		  
-      });
- 	
- 	
-        
+        });
+
     })
-    .controller('KFCtrl', function ($scope,$state) {
-        $scope.back = function(){
+    .controller('AccountProxyPromoteQrcodeCtrl', function ($scope, $state, $stateParams, $sce, UserService) {
+
+
+        $scope.qrcodesrc = "";
+        $scope.$on('$ionicView.beforeEnter', function () {
+
+            var qr = $stateParams.qr;
+
+
+            UserService.getPromoteQrcode("img=" + qr.img + "&qrsize=" + qr.qrsize + "&x=" + qr.x + "&y=" + qr.y).then(function (res) {
+                if (200 == res.code) {
+                    //  alert(res.body.imgsrc);
+                    $scope.qrcodesrc = "/img/promote" + res.msg;
+
+
+                } else {
+
+                }
+            });
+
+
+            // 	 $scope.qrcodesrc= "/user/getPromoteQrcode?img="+qr.img+"&qrsize="+qr.qrsize+"&x="+qr.x+"&y="+qr.y;
+
+
+        });
+
+
+    })
+    .controller('KFCtrl', function ($scope, $state) {
+        $scope.back = function () {
             $state.go('tab.rooms');
         }
     })
-    .controller('SubmitPayCtrl', function ($scope,$state,$stateParams,$sce) {		 
+    .controller('SubmitPayCtrl', function ($scope, $state, $stateParams, $sce) {
 
-	 	$scope.paysrc = $sce.trustAsResourceUrl( $stateParams.paysrc);
+        $scope.paysrc = $sce.trustAsResourceUrl($stateParams.paysrc);
 
-        
+
     })
-     .controller('WithdrawQrCodeCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup, Upload) {		 
+    .controller('WithdrawQrCodeCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup, Upload) {
 
-	 	 
-    	 
-    	   $scope.uploadwx = function (file) {
-               if(file == null){
-                   return;
-               }
-               Upload.upload({
-                   url: 'user/uploadqrcode',
-                   method: 'POST',
-                   headers: {
-                       'x-access-token': $rootScope.user.accessToken,
-                       'x-access-uid': $rootScope.user.id
-                   },
-                   data: {file: file,qrtype:"wx"}
-               }).then(function (res) {
-                 // alert(res.data.body.headImage)
-                   if(res.data.code == 200){
-                       $ionicPopup.alert({
-                           title: '提示',
-                           template: "上传成功"
-                       });
-                       $scope.wximgsrc = res.data.body.qrtype;
-                   }else{
-                       $ionicPopup.alert({
-                           title: '提示',
-                           template: res.data.msg
-                       });
-                   }
-                   //console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-               });
-           };
-    	 
-    	 
-           $scope.uploadzfb = function (file) {
-               if(file == null){
-                   return;
-               }
-               Upload.upload({
-                   url: 'user/uploadqrcode',
-                   method: 'POST',
-                   headers: {
-                       'x-access-token': $rootScope.user.accessToken,
-                       'x-access-uid': $rootScope.user.id
-                   },
-                   data: {file: file,qrtype:"zfb"}
-               }).then(function (res) {
-                   //alert(res.data.body.headImage)
-                   if(res.data.code == 200){
-                       $ionicPopup.alert({
-                           title: '提示',
-                           template: "上传成功"
-                       });
-                       $scope.zfbimgsrc = res.data.body.qrtype;
-                   }else{
-                       $ionicPopup.alert({
-                           title: '提示',
-                           template: res.data.msg
-                       });
-                   }
-                   //console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-               });
-           };
-    	 
-    	 
-    	 
-    	 
-           $scope.$on('$ionicView.beforeEnter', function () {
-        	   $scope.zfbimgsrc="img/pay.png";
-        	   $scope.wximgsrc="img/pay.png";
-        	   
-        	  
-        	   
-        	   UserService.getBankQrcode("wx"+$rootScope.user.id).then(function (res) {
-                   if (200 == res.code) {
-                	 //  alert(res.body.imgsrc);
-                	   $scope.wximgsrc = res.body.imgsrc;
-                 	   
-                 
-                   } else {
-                       
-                   }
-               });
-        	    
-        	   UserService.getBankQrcode("zfb"+$rootScope.user.id).then(function (res) {
-                   if (200 == res.code) {
-                	   $scope.zfbimgsrc = res.body.imgsrc;
-                 	   
-                 
-                   } else {
-                       
-                   }
-               });
-        	   
-        	   
-        	   
-                
-           });
-    	 
-    	 
-    	 
-    	 
 
-        
+        $scope.uploadwx = function (file) {
+            if (file == null) {
+                return;
+            }
+            Upload.upload({
+                url: 'user/uploadqrcode',
+                method: 'POST',
+                headers: {
+                    'x-access-token': $rootScope.user.accessToken,
+                    'x-access-uid': $rootScope.user.id
+                },
+                data: {file: file, qrtype: "wx"}
+            }).then(function (res) {
+                // alert(res.data.body.headImage)
+                if (res.data.code == 200) {
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: "上传成功"
+                    });
+                    $scope.wximgsrc = res.data.body.qrtype;
+                } else {
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: res.data.msg
+                    });
+                }
+                //console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            });
+        };
+
+
+        $scope.uploadzfb = function (file) {
+            if (file == null) {
+                return;
+            }
+            Upload.upload({
+                url: 'user/uploadqrcode',
+                method: 'POST',
+                headers: {
+                    'x-access-token': $rootScope.user.accessToken,
+                    'x-access-uid': $rootScope.user.id
+                },
+                data: {file: file, qrtype: "zfb"}
+            }).then(function (res) {
+                //alert(res.data.body.headImage)
+                if (res.data.code == 200) {
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: "上传成功"
+                    });
+                    $scope.zfbimgsrc = res.data.body.qrtype;
+                } else {
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: res.data.msg
+                    });
+                }
+                //console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            });
+        };
+
+
+        $scope.$on('$ionicView.beforeEnter', function () {
+            $scope.zfbimgsrc = "img/pay.png";
+            $scope.wximgsrc = "img/pay.png";
+
+
+            UserService.getBankQrcode("wx" + $rootScope.user.id).then(function (res) {
+                if (200 == res.code) {
+                    //  alert(res.body.imgsrc);
+                    $scope.wximgsrc = res.body.imgsrc;
+
+
+                } else {
+
+                }
+            });
+
+            UserService.getBankQrcode("zfb" + $rootScope.user.id).then(function (res) {
+                if (200 == res.code) {
+                    $scope.zfbimgsrc = res.body.imgsrc;
+
+
+                } else {
+
+                }
+            });
+
+
+        });
+
+
     })
-      .controller('InframeCtrl', function ($scope,$state,$stateParams,$sce) {		 
+    .controller('InframeCtrl', function ($scope, $state, $stateParams, $sce) {
 
-	 	$scope.inframesrc = $sce.trustAsResourceUrl( $stateParams.inframe);
+        $scope.inframesrc = $sce.trustAsResourceUrl($stateParams.inframe);
 
-        
+
     })
-    .controller('CreateCtrl', function ($scope, $ionicPopup, UserService,configService,$state) {
-    	
-    	 $scope.conf = {};
-         $scope.$on('$ionicView.beforeEnter', function () {
-             UserService.getCreateRoomConfig().then(function (res) {
-                 if (200 == res.code) {
-                     $scope.conf = res.body;
-                     if( $scope.conf.exp=="0")
-                    	 {
-                    	 $ionicPopup.alert({
-                             title: '提示',
-                             template:"暂停游戏房间群组自助创建,需要申请联系管理员"
-                    	    
-                         });
-                    	  $state.go('tab.rooms');
-                    	 
-                    	 }
-                 } else {
-                     $ionicPopup.alert({
-                         title: '提示',
-                         template: res.msg
-                     });
-                 }
-             });
-         });
-    	
-    	
-    	
-    	
-    	$scope.data = {};
-    	  $scope.applygameTypes = {};
-    	  $scope.roomimgs={};
-    	 // data.limitNum =100;
-    	  configService.getDic('dic.chat.applygameType').then(function (res) {
-    		  
-    		  $scope.applygameTypes = res;
-    		    });
-    	  
-    	  configService.getDic('dic.chat.applyroomLogo').then(function (res) {
-    		  $scope.roomimgs = res;
-    		    });
-    		  
-          $scope.doCreate = function () {
-              if (!$scope.data.name || !$scope.data.limitNum) {
-                  $ionicPopup.alert({
-                      title: '提示',
-                      template: '用户名或人数限制不能为空'
-                  });
-                  return;
-              }
-              if(!$scope.data.type)
-            	  {
-            	  $ionicPopup.alert({
-                      title: '提示',
-                      template: '游戏类型不能为空'
-                  });
-                  return;
-            	  }
-              if($scope.data.limitNum>100)
-        	  {
-        	  $ionicPopup.alert({
-                  title: '提示',
-                  template: '最大人数不能大于100'
-              });
-              return;
-        	  }
-              UserService.applyCreateRoom($scope.data).then(function (res) {
-                  if (200 == res.code) {
-                	  
-                	  $ionicPopup.alert({
-                          title: '提示',
-                          template: "房间群组创建成功，请继续维护扩展配置"
-                      });
-                	  
-                	  $state.go('tab.account-room-props',{roomId:res.body.id});
-                  } else {
-                      $ionicPopup.alert({
-                          title: '提示',
-                          template: res.msg
-                      });
-                  }
-              });
-          };
+    .controller('CreateCtrl', function ($scope, $ionicPopup, UserService, configService, $state) {
 
-         
+        $scope.conf = {};
+        $scope.$on('$ionicView.beforeEnter', function () {
+            UserService.getCreateRoomConfig().then(function (res) {
+                if (200 == res.code) {
+                    $scope.conf = res.body;
+                    if ($scope.conf.exp == "0") {
+                        $ionicPopup.alert({
+                            title: '提示',
+                            template: "暂停游戏房间群组自助创建,需要申请联系管理员"
+
+                        });
+                        $state.go('tab.rooms');
+
+                    }
+                } else {
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: res.msg
+                    });
+                }
+            });
+        });
+
+
+        $scope.data = {};
+        $scope.applygameTypes = {};
+        $scope.roomimgs = {};
+        // data.limitNum =100;
+        configService.getDic('dic.chat.applygameType').then(function (res) {
+
+            $scope.applygameTypes = res;
+        });
+
+        configService.getDic('dic.chat.applyroomLogo').then(function (res) {
+            $scope.roomimgs = res;
+        });
+
+        $scope.doCreate = function () {
+            if (!$scope.data.name || !$scope.data.limitNum) {
+                $ionicPopup.alert({
+                    title: '提示',
+                    template: '用户名或人数限制不能为空'
+                });
+                return;
+            }
+            if (!$scope.data.type) {
+                $ionicPopup.alert({
+                    title: '提示',
+                    template: '游戏类型不能为空'
+                });
+                return;
+            }
+            if ($scope.data.limitNum > 100) {
+                $ionicPopup.alert({
+                    title: '提示',
+                    template: '最大人数不能大于100'
+                });
+                return;
+            }
+            UserService.applyCreateRoom($scope.data).then(function (res) {
+                if (200 == res.code) {
+
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: "房间群组创建成功，请继续维护扩展配置"
+                    });
+
+                    $state.go('tab.account-room-props', {roomId: res.body.id});
+                } else {
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: res.msg
+                    });
+                }
+            });
+        };
+
+
     })
 
     // .controller('leftMenu', function ($rootScope, $scope, configService) {
@@ -296,26 +271,26 @@ angular.module('starter.controllers', [])
     //     };
     // })
 
-    .controller('RoomsCtrl', function ($rootScope, $scope,Auth, Rooms,UserService, $state, configService, $ionicSideMenuDelegate, $ionicPopup, $interval, $timeout, $ionicScrollDelegate, myConstants) {
-      
-    	$scope.hidesearch="1";
-    	$scope.$on('$ionicView.loaded', function () {
-        	
-        	configService.getAppInfo().then(function (res) {
+    .controller('RoomsCtrl', function ($rootScope, $scope, Auth, Rooms, UserService, $state, configService, $ionicSideMenuDelegate, $ionicPopup, $interval, $timeout, $ionicScrollDelegate, myConstants) {
+
+        $scope.hidesearch = "1";
+        $scope.$on('$ionicView.loaded', function () {
+
+            configService.getAppInfo().then(function (res) {
                 if (res.code == 200) {
                     var appinfo = res.body;
-                      lotteryDescription = appinfo.lotteryDescription?appinfo.lotteryDescription:lotteryDescription;
-                      appTitle =appinfo.appTitle?appinfo.appTitle:appTitle;
-                      hometitle=appinfo.hometitle?appinfo.lotteryDescription:hometitle;
-                      lotteryMaxNumber =parseInt(appinfo.lotteryMaxNumber?appinfo.lotteryMaxNumber:lotteryMaxNumber);
-                      lotteryMaxMoney = parseInt(appinfo.lotteryMaxMoney?appinfo.lotteryMaxMoney:lotteryMaxMoney);
-                      lotteryUnit =appinfo.lotteryUnit?appinfo.lotteryUnit:lotteryUnit;
-                      $scope.hidesearch=appinfo.hidesearch;
+                    lotteryDescription = appinfo.lotteryDescription ? appinfo.lotteryDescription : lotteryDescription;
+                    appTitle = appinfo.appTitle ? appinfo.appTitle : appTitle;
+                    hometitle = appinfo.hometitle ? appinfo.lotteryDescription : hometitle;
+                    lotteryMaxNumber = parseInt(appinfo.lotteryMaxNumber ? appinfo.lotteryMaxNumber : lotteryMaxNumber);
+                    lotteryMaxMoney = parseInt(appinfo.lotteryMaxMoney ? appinfo.lotteryMaxMoney : lotteryMaxMoney);
+                    lotteryUnit = appinfo.lotteryUnit ? appinfo.lotteryUnit : lotteryUnit;
+                    $scope.hidesearch = appinfo.hidesearch;
                 } else {
-                    
+
                 }
             });
-        	
+
             var marquee = ['img/home/banner_1.png', 'img/home/banner_2.png'];
             if (marquee.length > 1) {
                 $scope.marquee = [marquee[0], marquee[1]];
@@ -334,21 +309,15 @@ angular.module('starter.controllers', [])
         });
 
 
-
-		$scope.$on('$ionicView.beforeLeave', function () {
-
-			 
-
-               if( $scope.interval!=null){
-
-                 $interval.cancel(  $scope.interval);
-			   }
-
-			}
-);
+        $scope.$on('$ionicView.beforeLeave', function () {
+                if ($scope.interval != null) {
+                    $interval.cancel($scope.interval);
+                }
+            }
+        );
 
 
-$scope.$on('$ionicView.beforeEnter', function () {
+        $scope.$on('$ionicView.beforeEnter', function () {
             configService.getDic('dic.chat.gameType').then(function (res) {
                 $scope.gameTypes = res;
             });
@@ -360,52 +329,47 @@ $scope.$on('$ionicView.beforeEnter', function () {
                     $scope.onlineCount = 0;
                 }
             });
-            Auth.isSignIn(function (user) 
-        			{
-                    	
-        				if( $rootScope.user )
-        				{
-                        
+            Auth.isSignIn(function (user) {
 
-        					 UserService.getBalance().then(function (res) {
-                            if (res.code == 200) {
-                                var b = res.body;
-                                if (/^(-?\d+)(\.\d+)?$/.test(b)) {
-                                    b = b.toFixed(2).replace('.00', '');
-                                }
-                               
-                                    $rootScope.user.money = b;
-                                
+                if ($rootScope.user) {
+
+
+                    UserService.getBalance().then(function (res) {
+                        if (res.code == 200) {
+                            var b = res.body;
+                            if (/^(-?\d+)(\.\d+)?$/.test(b)) {
+                                b = b.toFixed(2).replace('.00', '');
                             }
-                        }).finally(function () {
-                            $scope.$broadcast('scroll.refreshComplete');
-                        });
-        				    
-        					$scope.user   = $rootScope.user;
-        				}
-        			});
-            $scope.notice="好运连连   恭喜iMaxGame";
-            Rooms.getNotice().then(function (res) {
-                if (res.code == 200) {
-                   
-                        $scope.notice = res.body;
-                    
+
+                            $rootScope.user.money = b;
+
+                        }
+                    }).finally(function () {
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
+
+                    $scope.user = $rootScope.user;
                 }
             });
-            
+            $scope.notice = "";
+            Rooms.getNotice().then(function (res) {
+                if (res.code == 200) {
+                    $scope.notice = res.body;
+                }
+            });
+
             $scope.interval = $interval(function () {
                 var obj = document.getElementById('scrollobj');
-                if(obj==null||obj=="undefined")
-				{
-                           $interval.cancel(  $scope.interval);
-				}
+                if (obj == null || obj == "undefined") {
+                    $interval.cancel($scope.interval);
+                }
                 var tmp = (obj.scrollLeft)++;
-                if (obj.scrollLeft >= 1000) obj.scrollLeft=0;
+                if (obj.scrollLeft >= 1000) obj.scrollLeft = 0;
                 //当滚动条到达右边顶端时
-                if (obj.scrollLeft==tmp) obj.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + $scope.notice;
+                if (obj.scrollLeft == tmp) obj.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + $scope.notice;
 
             }, 20);
-            
+
             $scope.doRefresh();
         });
 
@@ -423,17 +387,17 @@ $scope.$on('$ionicView.beforeEnter', function () {
         $scope.collapseRoomGroup = function (gameType) {
             $scope.gameTypeHideStatus[gameType] = !$scope.gameTypeHideStatus[gameType];
         };
-		
-		$scope.showGameType = function (gameType) {
-            if($scope.gameTypeHideStatus.showType == gameType){
+
+        $scope.showGameType = function (gameType) {
+            if ($scope.gameTypeHideStatus.showType == gameType) {
                 $scope.gameTypeHideStatus.showType = null;
-            }else{
+            } else {
                 $scope.gameTypeHideStatus.showType = gameType
                 $ionicScrollDelegate.scrollBy(0, 100, [true])
             }
             $ionicScrollDelegate.resize();
         };
-		
+
         $scope.join = function (room) {
             $rootScope.room = room;
             switch ($rootScope.room.type) {
@@ -449,14 +413,13 @@ $scope.$on('$ionicView.beforeEnter', function () {
             }
         };
 
-        
-       
+
         $scope.searchRoom = function (roomId) {
-        	Rooms.getRoom(roomId).then(function (res) {
+            Rooms.getRoom(roomId).then(function (res) {
                 if (200 == res.code) {
-                  
+
                     $scope.join(res.body);
-                }else{
+                } else {
                     $ionicPopup.alert({
                         title: '提示',
                         template: res.msg
@@ -464,8 +427,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 }
             });
         };
-        
-        
+
+
         $scope.toggleLeft = function () {
             $ionicSideMenuDelegate.toggleLeft();
         };
@@ -480,8 +443,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
     })
 
 
-
-    .controller('RoomDetailCtrl', function ($rootScope, $scope, $ionicLoading, $ionicScrollDelegate, $stateParams, $ionicBackdrop, $ionicPopup, $ionicPopover, $state, $ionicModal, $ionicActionSheet, $timeout, $interval, configService, UserService, Rooms, webSocketService, Auth, PcEgg,PcEggforJnd) {
+    .controller('RoomDetailCtrl', function ($rootScope, $scope, $ionicLoading, $ionicScrollDelegate, $stateParams, $ionicBackdrop, $ionicPopup, $ionicPopover, $state, $ionicModal, $ionicActionSheet, $timeout, $interval, configService, UserService, Rooms, webSocketService, Auth, PcEgg, PcEggforJnd) {
         var ws;
         var joinRoom;
         $scope.$on('$ionicView.beforeEnter', function () {
@@ -489,18 +451,19 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 $ionicLoading.show({
                     template: '正在链接..'
                 });
-                Auth.isSignIn(function() {
+                Auth.isSignIn(function () {
                     Rooms.join($stateParams.roomId).then(function (res) {
                         if (200 == res.code) {
-                            ws = webSocketService.create({onMessage: $scope.onMessage, onOpen: function () {
-                                if ($rootScope.room.type == 'G03') {
-                                    $scope.send(3, 'latestTermCmd', null);
+                            ws = webSocketService.create({
+                                onMessage: $scope.onMessage, onOpen: function () {
+                                    if ($rootScope.room.type == 'G03') {
+                                        $scope.send(3, 'latestTermCmd', null);
+                                    }
+                                    else if ($rootScope.room.type == 'G30') {
+                                        $scope.send(3, 'latestTermCmdForJnd', null);
+                                    }
                                 }
-                                else
-                                	if ($rootScope.room.type == 'G30') {
-                                    $scope.send(3, 'latestTermCmdForJnd', null);
-                                }
-                            }});
+                            });
                         } else {
                             $ionicPopup.alert({
                                 title: '提示',
@@ -551,7 +514,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                     break;
                                 case 'G30':
                                     $state.go('tab.room-detail-' + $rootScope.room.type, {roomId: $stateParams.roomId}, {reload: true});
-                                    break; 
+                                    break;
                                 default:
                                     $state.go('tab.room-detail', {roomId: $stateParams.roomId}, {reload: true});
                                     break;
@@ -559,11 +522,10 @@ $scope.$on('$ionicView.beforeEnter', function () {
                         }, 300);
                         return;
                     }
-                    else
-                    	{
-                    	  $rootScope.room = res.body;
-                    	}
-                    	
+                    else {
+                        $rootScope.room = res.body;
+                    }
+
                     if ($rootScope.room.needPsw) {
                         if (!$rootScope.pwdInput) {
                             showPwdInput();
@@ -573,33 +535,32 @@ $scope.$on('$ionicView.beforeEnter', function () {
                     }
                     $scope.isGameBegin = $rootScope.room.status == '1';
 
-               
-                    if ( ($rootScope.room.type == 'G03') ||( $rootScope.room.type == 'G30')) {
+
+                    if (($rootScope.room.type == 'G03') || ($rootScope.room.type == 'G30')) {
                         $scope.touzhuState = {
                             inputSelected: false,
                             amount: null
                         };
-                      
-                        
-                        if ($rootScope.room.type == 'G03'){
+
+
+                        if ($rootScope.room.type == 'G03') {
                             PcEgg.getRates().then(function (res) {
                                 if (res.code == 200) {
                                     $scope.pcRates = res.body;
                                 }
                             });
-                            }else if ($rootScope.room.type == 'G30') {
-                            	
-                            	PcEggforJnd.getRates().then(function (res) {
-                                     if (res.code == 200) {
-                                         $scope.pcRates = res.body;
-                                     }
-                                 });
-                            	
-                            	
-                            }
-                            	
-                        
-                        
+                        } else if ($rootScope.room.type == 'G30') {
+
+                            PcEggforJnd.getRates().then(function (res) {
+                                if (res.code == 200) {
+                                    $scope.pcRates = res.body;
+                                }
+                            });
+
+
+                        }
+
+
                         $scope.termTimeout = function (remainSeconds) {
                             var m = Math.floor(remainSeconds / 60) % 60;
                             var h = Math.floor(remainSeconds / 60 / 60);
@@ -629,18 +590,18 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                 $scope.second2 = s.substring(1, 2);
                             }
                             //chb 封盘计时代码
-                            if(remainSeconds <= 60 && remainSeconds >= 30){
+                            if (remainSeconds <= 60 && remainSeconds >= 30) {
                                 $scope.stopTime = true;
                                 var stopSecond = remainSeconds - 30;
-                                if(stopSecond < 10){
+                                if (stopSecond < 10) {
                                     $scope.stopSecond1 = '0';
                                     $scope.stopSecond2 = stopSecond < 0 ? 0 : stopSecond;
-                                }else{
+                                } else {
                                     stopSecond = stopSecond + "";
                                     $scope.stopSecond1 = stopSecond.substring(0, 1);
                                     $scope.stopSecond2 = stopSecond.substring(1, 2);
                                 }
-                            }else{
+                            } else {
                                 $scope.stopTime = false;
                             }
                         };
@@ -719,14 +680,13 @@ $scope.$on('$ionicView.beforeEnter', function () {
                         };
 
 
-
-                        $scope.pcEggBetforJnd=function() {
-                        	  Auth.isSignIn(function (user) {
-                                  if (!user) {
-                                      showLoginDialog();
-                                      return;
-                                  } 
-                        	  });
+                        $scope.pcEggBetforJnd = function () {
+                            Auth.isSignIn(function (user) {
+                                if (!user) {
+                                    showLoginDialog();
+                                    return;
+                                }
+                            });
                             if (!$scope.selectedRate || !$scope.touzhuState.amount || $scope.touzhuState.amount < 0 || !$scope.termId) {
                                 return;
                             }
@@ -734,7 +694,11 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                 return;
                             }
                             $scope.touzhuState.betting = true;
-                            PcEggforJnd.bet({'num': $scope.termId, 'key': $scope.selectedRate.param, 'money': $scope.touzhuState.amount}).then(function (res) {
+                            PcEggforJnd.bet({
+                                'num': $scope.termId,
+                                'key': $scope.selectedRate.param,
+                                'money': $scope.touzhuState.amount
+                            }).then(function (res) {
                                 $scope.touzhuState.betting = false;
                                 if (res.code == 200) {
                                     $ionicPopup.alert({
@@ -742,7 +706,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                         template: res.msg
                                     });
                                     $scope.touzhuPadShow = false;
-                                }else{
+                                } else {
                                     $ionicPopup.alert({
                                         title: '错误',
                                         template: res.msg
@@ -751,17 +715,15 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                 }
                             });
                         };
-                        
-
 
 
                         $scope.pcEggBet = function () {
-                        	  Auth.isSignIn(function (user) {
-                                  if (!user) {
-                                      showLoginDialog();
-                                      return;
-                                  } 
-                        	  });
+                            Auth.isSignIn(function (user) {
+                                if (!user) {
+                                    showLoginDialog();
+                                    return;
+                                }
+                            });
                             if (!$scope.selectedRate || !$scope.touzhuState.amount || $scope.touzhuState.amount < 0 || !$scope.termId) {
                                 return;
                             }
@@ -769,7 +731,11 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                 return;
                             }
                             $scope.touzhuState.betting = true;
-                            PcEgg.bet({'num': $scope.termId, 'key': $scope.selectedRate.param, 'money': $scope.touzhuState.amount}).then(function (res) {
+                            PcEgg.bet({
+                                'num': $scope.termId,
+                                'key': $scope.selectedRate.param,
+                                'money': $scope.touzhuState.amount
+                            }).then(function (res) {
                                 $scope.touzhuState.betting = false;
                                 if (res.code == 200) {
                                     $ionicPopup.alert({
@@ -777,7 +743,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                         template: res.msg
                                     });
                                     $scope.touzhuPadShow = false;
-                                }else{
+                                } else {
                                     $ionicPopup.alert({
                                         title: '错误',
                                         template: res.msg
@@ -786,8 +752,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                 }
                             });
                         };
-                        
-                               $scope.cancelPcEggBet = function () {
+
+                        $scope.cancelPcEggBet = function () {
                             $ionicPopup.confirm({
                                 title: '提示',
                                 template: '确定取消本期所有下注?',
@@ -802,7 +768,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                                 title: '提示',
                                                 template: res.msg
                                             });
-                                        }else{
+                                        } else {
                                             $ionicPopup.alert({
                                                 title: '错误',
                                                 template: res.msg
@@ -812,7 +778,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                 }
                             });
                         };
-                        
+
 
                     }
                 } else {
@@ -823,7 +789,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                     return false;
                 }
             });
-            
+
             if ($rootScope.room) {
                 $scope.roomLink = window.location.href;
                 var clipboard = new Clipboard('.room-menu-item.room-link');
@@ -835,9 +801,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 });
                 $scope.clipboard = clipboard;
             }
-            
-            
-            
+
+
         });
         $scope.$on('$ionicView.afterLeave', function () {
             $scope.clipboard.destroy();
@@ -897,15 +862,21 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 template: content || '注册用户才可以发言和参与游戏',
                 scope: $scope,
                 buttons: [
-                    {text: '注册', type: 'button-default', onTap: function () {
-                        return 0;
-                    }},
-                    {text: '登录', type: 'button-positive', onTap: function () {
-                        return 1;
-                    }},
-                    {text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
-                        return 2;
-                    }}
+                    {
+                        text: '注册', type: 'button-default', onTap: function () {
+                            return 0;
+                        }
+                    },
+                    {
+                        text: '登录', type: 'button-positive', onTap: function () {
+                            return 1;
+                        }
+                    },
+                    {
+                        text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
+                            return 2;
+                        }
+                    }
                 ]
             }).then(function (res) {
                 if (res == 1) {
@@ -951,11 +922,12 @@ $scope.$on('$ionicView.beforeEnter', function () {
                     $scope.membersModal.show();
                     break;
                 case 'lotteryOpenSuccess':
-                   $scope.lotteries[content].opened = 1;
+                    $scope.lotteries[content].opened = 1;
                     $timeout(function () {
                         $scope.opening = false;
                         $scope.audio = document.createElement('audio');
-                        $scope.audio.src = '/music/hongbao.wav';;
+                        $scope.audio.src = '/music/hongbao.wav';
+                        ;
                         $scope.audio.play();
                         $scope.openDetailModal(content);
                     }, 600);
@@ -993,7 +965,6 @@ $scope.$on('$ionicView.beforeEnter', function () {
                     break;
             }
         };
-
 
 
         $scope.processLottery = function (data) {
@@ -1267,27 +1238,27 @@ $scope.$on('$ionicView.beforeEnter', function () {
         });
 
         $scope.openLottery = function (lotteryId) {
-        	
-        	//禁抢 单雷 多雷
-        	if ($rootScope.room.type == 'G43'||$rootScope.room.type == 'G46'){
-        		  this.openDetailModal(lotteryId);
-        	 /*   $ionicPopup.alert({
-                      title: '提示',
-                      template: "本群为禁抢群，仅可发包，稍后查看中雷结果。"
-                 });*/
-              	return;
-          		
-          	 }
-        	 if (1 == $scope.lotteries[lotteryId].opened) {
-              	  
-                 this.openDetailModal(lotteryId);
-                 return;
-             }
-        	 
+
+            //禁抢 单雷 多雷
+            if ($rootScope.room.type == 'G43' || $rootScope.room.type == 'G46') {
+                this.openDetailModal(lotteryId);
+                /*   $ionicPopup.alert({
+                         title: '提示',
+                         template: "本群为禁抢群，仅可发包，稍后查看中雷结果。"
+                    });*/
+                return;
+
+            }
+            if (1 == $scope.lotteries[lotteryId].opened) {
+
+                this.openDetailModal(lotteryId);
+                return;
+            }
+
             $scope.lottery = $scope.lotteries[lotteryId];
             this.send(2, 'checkLotteryStatusCmd', {lotteryId: lotteryId});
-            
-            
+
+
         };
 
         $scope.realOpenLottery = function (lotteryId) {
@@ -1296,8 +1267,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
             }
             $scope.opening = true;
             this.send(2, 'openLotteryCmd', {lotteryId: lotteryId});
-            
-            
+
+
         };
 
         $scope.closeLottery = function () {
@@ -1379,14 +1350,14 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 if (!user) {
                     showLoginDialog();
                 } else {
-                	  if ($scope.room.type == 'G45') {
-                		  
-                		  $ionicPopup.alert({
-                              title: '提示',
-                             template: '本群为坐庄群，玩家禁止发包.'
-                         });
-                	  }
-                	  else               if ($scope.room.type == 'G03') {
+                    if ($scope.room.type == 'G45') {
+
+                        $ionicPopup.alert({
+                            title: '提示',
+                            template: '本群为坐庄群，玩家禁止发包.'
+                        });
+                    }
+                    else if ($scope.room.type == 'G03') {
                         $scope.touzhuPadShow = true;
                         $scope.currentTouzhuPad = 'c';
                         UserService.getBalance().then(function (res) {
@@ -1398,8 +1369,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                 $scope.balance = b;
                             }
                         });
-                    } 
-                    else     if ($scope.room.type == 'G30') {
+                    }
+                    else if ($scope.room.type == 'G30') {
                         $scope.touzhuPadShow = true;
                         $scope.currentTouzhuPad = 'c';
                         UserService.getBalance().then(function (res) {
@@ -1411,7 +1382,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                 $scope.balance = b;
                             }
                         });
-                    }    
+                    }
                     else {
                         $scope.data = {
                             money: '',
@@ -1502,27 +1473,24 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 hideSheet();
             }, 2000);
         };
-        $scope.checkstr = function(str)
-        {
-        	   return /(.).*?\1/.test( str );
+        $scope.checkstr = function (str) {
+            return /(.).*?\1/.test(str);
         }
         $scope.send = function (flag, cmd, data) {
             $scope.btnDisabled = true;
             if (ws && 1 == ws.readyState) {
                 if (1 == flag) {
-                	 if ($scope.room.type == 'G42'||$scope.room.type == 'G46')
-                     {
-                		 if(this.checkstr($scope.data.description))
-                			 {
-                			  
-                			  $ionicPopup.alert({
-                                  title: '提示',
-                                 template: '有重复的雷点，不允许有重复的雷点.'
-                             });
-                			  $scope.btnDisabled = false;
-                			  return;
-                			 }
-                	 }
+                    if ($scope.room.type == 'G42' || $scope.room.type == 'G46') {
+                        if (this.checkstr($scope.data.description)) {
+
+                            $ionicPopup.alert({
+                                title: '提示',
+                                template: '有重复的雷点，不允许有重复的雷点.'
+                            });
+                            $scope.btnDisabled = false;
+                            return;
+                        }
+                    }
                     ws.send(JSON.stringify({content: $scope.data, type: 'RED'}));
                     $scope.btnDisabled = false;
                     //this.closeModal();
@@ -1713,7 +1681,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 ShopService.get($stateParams.shopId).then(function (res) {
                     if (res.code == 200) {
                         $scope.shop = res.body;
-                    }else{
+                    } else {
                         $ionicPopup.alert({
                             title: '提示',
                             template: "商品信息丢失!"
@@ -1727,7 +1695,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
         });
         $scope.records = [];
         $scope.page = 1;
-        $rootScope.shop={};
+        $rootScope.shop = {};
         $rootScope.concat = {};
         $scope.doRefresh = function () {
             $scope.page = 1;
@@ -1764,7 +1732,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 if (res.code == 200) {
                     $rootScope.shop = res.body;
                     $state.go('tab.shop-detail', {shopId: id});
-                }else{
+                } else {
                     $ionicPopup.alert({
                         title: '提示',
                         template: "商品信息丢失!"
@@ -1779,20 +1747,20 @@ $scope.$on('$ionicView.beforeEnter', function () {
             ShopService.getContactInfo().then(function (res) {
                 if (res.code == 200) {
                     $rootScope.contact = res.body;
-                    $state.go('tab.shop-exchange', {shop: shop,contact:$rootScope.contact});
+                    $state.go('tab.shop-exchange', {shop: shop, contact: $rootScope.contact});
                 }
             });
         }
 
-        $scope.step2 = function (shop,contact) {
-            ShopService.doExchange(shop.id,contact.name,contact.address,contact.mobile).then(function(res){
-                if(res.code==200){
+        $scope.step2 = function (shop, contact) {
+            ShopService.doExchange(shop.id, contact.name, contact.address, contact.mobile).then(function (res) {
+                if (res.code == 200) {
                     $ionicPopup.alert({
                         title: '提示',
                         template: "兑换成功,请留意“我的账户”兑换管理中的发货进度!"
                     });
                     $state.go('tab.shop');
-                }else{
+                } else {
                     $ionicPopup.alert({
                         title: '错误',
                         template: res.msg
@@ -1836,7 +1804,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
     })
-//支持正版，授权冲突，格式化系统，后果自负。
+    //支持正版，授权冲突，格式化系统，后果自负。
     .controller('AccountBonus03Ctrl', function ($scope, UserService) {
         $scope.records = [];
         $scope.page = 1;
@@ -1871,7 +1839,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
     })
-      .controller('AccountBonus30Ctrl', function ($scope, UserService) {
+    .controller('AccountBonus30Ctrl', function ($scope, UserService) {
         $scope.records = [];
         $scope.page = 1;
         $scope.doRefresh = function () {
@@ -1940,8 +1908,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
 
-        $scope.transfer = function (userId,money) {
-            if(money <= 0){
+        $scope.transfer = function (userId, money) {
+            if (money <= 0) {
                 $ionicPopup.alert({
                     title: '提示',
                     template: '金额必须大于0'
@@ -1952,18 +1920,24 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 if (200 == res.code) {
                     $ionicPopup.confirm({
                         title: '转账确认',
-                        template: '昵称:<strong style="color:green">'+res.nickName+'</strong><br>金额:<strong style="color:orangered">'+money+'金币</strong>',
+                        template: '昵称:<strong style="color:green">' + res.nickName + '</strong><br>金额:<strong style="color:orangered">' + money + '金币</strong>',
                         scope: $scope,
                         buttons: [
-                            {text: '取消', type: 'button-default', onTap: function () {
-                                return 0;
-                            }},
-                            {text: '确定', type: 'button-positive', onTap: function () {
-                                return 1;
-                            }},
-                            {text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
-                                return 2;
-                            }}
+                            {
+                                text: '取消', type: 'button-default', onTap: function () {
+                                    return 0;
+                                }
+                            },
+                            {
+                                text: '确定', type: 'button-positive', onTap: function () {
+                                    return 1;
+                                }
+                            },
+                            {
+                                text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
+                                    return 2;
+                                }
+                            }
                         ]
                     }).then(function (res) {
                         if (res == 1) {
@@ -1974,7 +1948,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                         template: res.msg
                                     });
                                     $state.go('tab.account');
-                                }else{
+                                } else {
                                     $ionicPopup.alert({
                                         title: '提示',
                                         template: res.msg
@@ -1986,7 +1960,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                             //webSocketService.close();
                         }
                     });
-                }else{
+                } else {
                     $ionicPopup.alert({
                         title: '提示',
                         template: res.msg
@@ -2031,8 +2005,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         };
 
-        $scope.prixyRecharge = function (userId,money) {
-            if(money <= 0){
+        $scope.prixyRecharge = function (userId, money) {
+            if (money <= 0) {
                 $ionicPopup.alert({
                     title: '提示',
                     template: '金额必须大于0'
@@ -2043,18 +2017,24 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 if (200 == res.code) {
                     $ionicPopup.confirm({
                         title: '上分确认',
-                        template: '昵称:<strong style="color:green">'+res.body+'</strong><br>金额:<strong style="color:orangered">'+money+'金币</strong>',
+                        template: '昵称:<strong style="color:green">' + res.body + '</strong><br>金额:<strong style="color:orangered">' + money + '金币</strong>',
                         scope: $scope,
                         buttons: [
-                            {text: '取消', type: 'button-default', onTap: function () {
-                                return 0;
-                            }},
-                            {text: '确定', type: 'button-positive', onTap: function () {
-                                return 1;
-                            }},
-                            {text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
-                                return 2;
-                            }}
+                            {
+                                text: '取消', type: 'button-default', onTap: function () {
+                                    return 0;
+                                }
+                            },
+                            {
+                                text: '确定', type: 'button-positive', onTap: function () {
+                                    return 1;
+                                }
+                            },
+                            {
+                                text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
+                                    return 2;
+                                }
+                            }
                         ]
                     }).then(function (res) {
                         if (res == 1) {
@@ -2065,7 +2045,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                         template: res.msg
                                     });
                                     $state.go('tab.account');
-                                }else{
+                                } else {
                                     $ionicPopup.alert({
                                         title: '提示',
                                         template: res.msg
@@ -2077,7 +2057,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                             //webSocketService.close();
                         }
                     });
-                }else{
+                } else {
                     $ionicPopup.alert({
                         title: '提示',
                         template: res.msg
@@ -2122,8 +2102,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         };
 
-        $scope.prixyUnRecharge = function (userId,money) {
-            if(money <= 0){
+        $scope.prixyUnRecharge = function (userId, money) {
+            if (money <= 0) {
                 $ionicPopup.alert({
                     title: '提示',
                     template: '金额必须大于0'
@@ -2134,18 +2114,24 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 if (200 == res.code) {
                     $ionicPopup.confirm({
                         title: '下分确认',
-                        template: "用户昵称:<strong style='color:green'>"+res.nickName+"</strong><br>账户余额:"+res.money+"金币<br>下分金额:<strong style='color:orangered'>"+money+"金币</strong>",
+                        template: "用户昵称:<strong style='color:green'>" + res.nickName + "</strong><br>账户余额:" + res.money + "金币<br>下分金额:<strong style='color:orangered'>" + money + "金币</strong>",
                         scope: $scope,
                         buttons: [
-                            {text: '取消', type: 'button-default', onTap: function () {
-                                return 0;
-                            }},
-                            {text: '确定', type: 'button-positive', onTap: function () {
-                                return 1;
-                            }},
-                            {text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
-                                return 2;
-                            }}
+                            {
+                                text: '取消', type: 'button-default', onTap: function () {
+                                    return 0;
+                                }
+                            },
+                            {
+                                text: '确定', type: 'button-positive', onTap: function () {
+                                    return 1;
+                                }
+                            },
+                            {
+                                text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
+                                    return 2;
+                                }
+                            }
                         ]
                     }).then(function (res) {
                         if (res == 1) {
@@ -2156,7 +2142,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                         template: res.msg
                                     });
                                     $state.go('tab.account');
-                                }else{
+                                } else {
                                     $ionicPopup.alert({
                                         title: '提示',
                                         template: res.msg
@@ -2168,7 +2154,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                             //webSocketService.close();
                         }
                     });
-                }else{
+                } else {
                     $ionicPopup.alert({
                         title: '提示',
                         template: res.msg
@@ -2215,7 +2201,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
 
     })
 
-      .controller('G30TrendCtrl', function ($scope, $state, $stateParams, Auth, $window, PcEggforJnd) {
+    .controller('G30TrendCtrl', function ($scope, $state, $stateParams, Auth, $window, PcEggforJnd) {
         $scope.records = [];
         $scope.page = 1;
         $scope.doRefreshforjnd = function () {
@@ -2230,7 +2216,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
         };
         $scope.noMoreItemsAvailable = false;
         $scope.loadMoreforjnd = function () {
-        	PcEggforJnd.getPcEggLog($scope.page, 50).then(function (res) {
+            PcEggforJnd.getPcEggLog($scope.page, 50).then(function (res) {
                 if (res.code == 200) {
                     if (res.body && res.body.length > 0) {
                         $scope.records = $scope.records.concat(res.body);
@@ -2249,8 +2235,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
         };
 
     })
-    
-    
+
+
     .controller('ProxyUsersCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup) {
         $scope.records = [];
         $scope.page = 1;
@@ -2299,24 +2285,30 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 }
             });
         });
-        $scope.apply = function(){
+        $scope.apply = function () {
 
-            msg ="<span style='color:dimgrey;font-size: 11px;'>系统将扣除账户金币购买代理权限，确认购买?</span>";
+            msg = "<span style='color:dimgrey;font-size: 11px;'>系统将扣除账户金币购买代理权限，确认购买?</span>";
 
             $ionicPopup.confirm({
                 title: '申请确认',
-                template:msg ,
+                template: msg,
                 scope: $scope,
                 buttons: [
-                    {text: '取消', type: 'button-default', onTap: function () {
-                        return 0;
-                    }},
-                    {text: '确定', type: 'button-positive', onTap: function () {
-                        return 1;
-                    }},
-                    {text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
-                        return 2;
-                    }}
+                    {
+                        text: '取消', type: 'button-default', onTap: function () {
+                            return 0;
+                        }
+                    },
+                    {
+                        text: '确定', type: 'button-positive', onTap: function () {
+                            return 1;
+                        }
+                    },
+                    {
+                        text: '<div class="close">+</div>', type: 'login-dlg-close', onTap: function () {
+                            return 2;
+                        }
+                    }
                 ]
             }).then(function (res) {
                 if (res == 1) {
@@ -2326,7 +2318,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                                 title: '提示',
                                 template: "恭喜,你已经成为代理!"
                             });
-                            $rootScope.user.userType='2';
+                            $rootScope.user.userType = '2';
                             $state.go('tab.account');
                         } else {
                             $ionicPopup.alert({
@@ -2417,19 +2409,19 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
     })
-        .controller('GamePointCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup) {
+    .controller('GamePointCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup) {
         $scope.records = [];
         $scope.page = 1;
         $scope.leveltag = $stateParams.level;
         $scope.doRefresh = function () {
-        	Auth.getUser( $rootScope.user.id ).then(function (res) {
+            Auth.getUser($rootScope.user.id).then(function (res) {
                 if (res.code == 200) {
                     var b = res.body;
-                    $scope. user =b;
+                    $scope.user = b;
                 }
             });
             $scope.page = 1;
-            UserService.getProxyGamepoint($scope.page, 20,$scope.leveltag).then(function (res) {
+            UserService.getProxyGamepoint($scope.page, 20, $scope.leveltag).then(function (res) {
                 if (res.code == 200) {
                     $scope.records = res.body;
                 }
@@ -2439,7 +2431,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
         };
         $scope.noMoreItemsAvailable = false;
         $scope.loadMore = function () {
-            UserService.getProxyGamepoint($scope.page, 20,$scope.leveltag).then(function (res) {
+            UserService.getProxyGamepoint($scope.page, 20, $scope.leveltag).then(function (res) {
                 if (res.code == 200) {
                     if (res.body && res.body.length > 0) {
                         $scope.records = $scope.records.concat(res.body);
@@ -2490,20 +2482,20 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
     })
-    
-        .controller('RechargePointCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup) {
+
+    .controller('RechargePointCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup) {
         $scope.records = [];
         $scope.page = 1;
-        $scope.leveltag =$stateParams.level;
+        $scope.leveltag = $stateParams.level;
         $scope.doRefresh = function () {
-        	Auth.getUser( $rootScope.user.id ).then(function (res) {
+            Auth.getUser($rootScope.user.id).then(function (res) {
                 if (res.code == 200) {
                     var b = res.body;
-                    $scope. user =b;
+                    $scope.user = b;
                 }
             });
             $scope.page = 1;
-            UserService.getProxyRechargePoint($scope.page, 20,$stateParams.level).then(function (res) {
+            UserService.getProxyRechargePoint($scope.page, 20, $stateParams.level).then(function (res) {
                 if (res.code == 200) {
                     $scope.records = res.body;
                 }
@@ -2513,7 +2505,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
         };
         $scope.noMoreItemsAvailable = false;
         $scope.loadMore = function () {
-            UserService.getProxyRechargePoint($scope.page, 20,$stateParams.level).then(function (res) {
+            UserService.getProxyRechargePoint($scope.page, 20, $stateParams.level).then(function (res) {
                 if (res.code == 200) {
                     if (res.body && res.body.length > 0) {
                         $scope.records = $scope.records.concat(res.body);
@@ -2531,11 +2523,11 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
     })
-    
-    
+
+
     .controller('AccountCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup, Upload) {
         $scope.upload = function (file) {
-            if(file == null){
+            if (file == null) {
                 return;
             }
             Upload.upload({
@@ -2548,13 +2540,13 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 data: {file: file}
             }).then(function (res) {
                 //alert(res.data.body.headImage)
-                if(res.data.code == 200){
+                if (res.data.code == 200) {
                     $ionicPopup.alert({
                         title: '提示',
                         template: "上传成功"
                     });
                     $scope.user.headImg = res.data.body.headImage;
-                }else{
+                } else {
                     $ionicPopup.alert({
                         title: '提示',
                         template: res.data.msg
@@ -2649,7 +2641,11 @@ $scope.$on('$ionicView.beforeEnter', function () {
         };
 
         $scope.bindMobile = function (smsCode) {
-            UserService.bindMobile({id: $rootScope.user.id, smsCode: smsCode, mobile: $scope.mobile}).then(function (res) {
+            UserService.bindMobile({
+                id: $rootScope.user.id,
+                smsCode: smsCode,
+                mobile: $scope.mobile
+            }).then(function (res) {
                 if (200 == res.code) {
                     $rootScope.user.mobile = $scope.mobile;
                     $ionicPopup.alert({
@@ -2685,27 +2681,25 @@ $scope.$on('$ionicView.beforeEnter', function () {
             });
         }
     })
-    .controller('AccountDetailCtrl',function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup) {
-    
-    	
+    .controller('AccountDetailCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup) {
+
+
         $scope.$on('$ionicView.beforeEnter', function () {
             $scope.doRefresh = function () {
-            	Auth.getUser( $rootScope.user.id ).then(function (res) {
+                Auth.getUser($rootScope.user.id).then(function (res) {
                     if (res.code == 200) {
                         var b = res.body;
-                        $scope. user =b;
+                        $scope.user = b;
                     }
                 }).finally(function () {
                     $scope.$broadcast('scroll.refreshComplete');
                 });
-                
+
             };
             $scope.doRefresh();
         });
 
-    	
-    	
-    	
+
     })
 
     .controller('UserRoomsCtrl', function ($scope, UserService) {
@@ -2725,15 +2719,15 @@ $scope.$on('$ionicView.beforeEnter', function () {
         };
     })
 
-    .controller('UserRoomPropsCtrl', function ($scope, $stateParams, Rooms,$ionicPopup,$state) {
+    .controller('UserRoomPropsCtrl', function ($scope, $stateParams, Rooms, $ionicPopup, $state) {
         $scope.$on('$ionicView.beforeEnter', function () {
             Rooms.getProps($stateParams.roomId).then(function (res) {
-            
+
                 if (res.code == 200) {
-                 
+
                     $scope.props = res.body.props;
                     $scope.room = res.body.room;
-                }else{
+                } else {
                     $ionicPopup.alert({
                         title: '提示',
                         template: res.msg
@@ -2741,48 +2735,46 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 }
             });
         });
-      
-        $scope.updateRoomProp = function (roomId,key,alias) {
+
+        $scope.updateRoomProp = function (roomId, key, alias) {
             $ionicPopup.prompt({
-                title: '修改房间属性['+alias+"]",
+                title: '修改房间属性[' + alias + "]",
                 okText: '确定',
                 okType: 'button-green',
                 cancelText: '取消',
                 inputType: 'text'
             }).then(function (value) {
-            	if(!value)
-            		{
-            		return;
-            		}
-            	if(key=="limitNum" &&(value>100))
-                 {
-            		$ionicPopup.alert({
+                if (!value) {
+                    return;
+                }
+                if (key == "limitNum" && (value > 100)) {
+                    $ionicPopup.alert({
                         title: '提示',
                         template: "最大人数不能超过100"
                     });
 
-            		 return ;
-            		
-            		}
-                Rooms.updateRoomProp(roomId,key,value).then(function (res) {
+                    return;
+
+                }
+                Rooms.updateRoomProp(roomId, key, value).then(function (res) {
                     if (res.code == 200) {
                         $ionicPopup.alert({
                             title: '提示',
                             template: "修改成功!"
                         });
 
-                        if(key=="id"){
+                        if (key == "id") {
                             $state.go("tab.account-rooms");
-                        }else{
+                        } else {
                             Rooms.getProps($stateParams.roomId).then(function (res) {
                                 if (res.code == 200) {
                                     $scope.props = res.body.props;
                                     $scope.room = res.body.room;
-                                  
+
                                 }
                             });
                         }
-                    }else{
+                    } else {
                         $ionicPopup.alert({
                             title: '提示',
                             template: res.msg
@@ -2792,39 +2784,37 @@ $scope.$on('$ionicView.beforeEnter', function () {
             });
         };
 
-        
-        
-        $scope.updateProp = function (roomId,proid,key,alias) {
+
+        $scope.updateProp = function (roomId, proid, key, alias) {
             $ionicPopup.prompt({
-                title: '修改房间属性['+alias+"]",
+                title: '修改房间属性[' + alias + "]",
                 okText: '确定',
                 okType: 'button-green',
                 cancelText: '取消',
                 inputType: 'text'
             }).then(function (value) {
-            	if(!value)
-        		{
-        		return;
-        		}
-                Rooms.updateProp(roomId,proid,key,value).then(function (res) {
+                if (!value) {
+                    return;
+                }
+                Rooms.updateProp(roomId, proid, key, value).then(function (res) {
                     if (res.code == 200) {
                         $ionicPopup.alert({
                             title: '提示',
                             template: "修改成功!"
                         });
 
-                        if(key=="id"){
+                        if (key == "id") {
                             $state.go("tab.account-rooms");
-                        }else{
+                        } else {
                             Rooms.getProps($stateParams.roomId).then(function (res) {
                                 if (res.code == 200) {
                                     $scope.props = res.body.props;
                                     $scope.room = res.body.room;
-                                  
+
                                 }
                             });
                         }
-                    }else{
+                    } else {
                         $ionicPopup.alert({
                             title: '提示',
                             template: res.msg
@@ -2835,18 +2825,17 @@ $scope.$on('$ionicView.beforeEnter', function () {
         };
 
         $scope.deleteRoom = function (roomId) {
-        	$ionicPopup.confirm({
+            $ionicPopup.confirm({
                 title: '提示',
                 template: '确定删除本房间?',
                 okText: '是',
                 okType: 'button-green',
                 cancelText: '否'
             }).then(function (res) {
-             
-            	if(!res)
-        		{
-        		   return;
-        		}
+
+                if (!res) {
+                    return;
+                }
                 Rooms.deleteRoom(roomId).then(function (res) {
                     if (res.code == 200) {
                         $ionicPopup.alert({
@@ -2854,8 +2843,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
                             template: "删除成功!"
                         });
                         $state.go("tab.account-rooms");
-                        
-                    }else{
+
+                    } else {
                         $ionicPopup.alert({
                             title: '提示',
                             template: res.msg
@@ -2864,9 +2853,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 })
             });
         };
-      
-        
-        
+
+
     })
 
     .controller('BankCardsCtrl', function ($scope, $state, $stateParams, Account) {
@@ -2878,12 +2866,12 @@ $scope.$on('$ionicView.beforeEnter', function () {
         $scope.refreshCards = function () {
             Account.getBankCards().then(function (res) {
                 if (res.code == 200) {
-                  /*  if (!res.body || res.body.length == 0) {
-                        if ($scope.forWithdraw) {
-                            $state.go('tab.account-withdraw');
-                            return;
-                        }
-                    }*/
+                    /*  if (!res.body || res.body.length == 0) {
+                          if ($scope.forWithdraw) {
+                              $state.go('tab.account-withdraw');
+                              return;
+                          }
+                      }*/
                     $scope.cards = res.body;
                 }
             }).finally(function () {
@@ -2895,14 +2883,14 @@ $scope.$on('$ionicView.beforeEnter', function () {
             if (!$scope.forWithdraw) {
                 return;
             }
-         
+
             var params = {
                 bankName: card.bankName,
                 branch: card.branch,
                 ownerName: card.name,
                 account: card.account,
                 mobile: card.mobile,
-                imgsrc:card.imgsrc
+                imgsrc: card.imgsrc
             };
 
             $state.go('tab.account-withdraw', params);
@@ -2914,15 +2902,15 @@ $scope.$on('$ionicView.beforeEnter', function () {
         $scope.page = 1;
 
         $scope.doRefresh = function () {
-        	   if ($scope.loading) {
-                   return;
-               }
-               $scope.loading = true;
+            if ($scope.loading) {
+                return;
+            }
+            $scope.loading = true;
             $scope.page = 1;
             Account.getRechargeRecords($scope.page, 20).then(function (res) {
                 if (res.code == 200) {
                     $scope.records = res.body;
-                }  
+                }
                 $scope.loading = false;
             }).finally(function () {
                 $scope.$broadcast('scroll.refreshComplete');
@@ -2931,10 +2919,10 @@ $scope.$on('$ionicView.beforeEnter', function () {
 
         $scope.noMoreItemsAvailable = false;
         $scope.loadMore = function () {
-        	   if ($scope.loading) {
-                   return;
-               }
-               $scope.loading = true;
+            if ($scope.loading) {
+                return;
+            }
+            $scope.loading = true;
             Account.getRechargeRecords($scope.page, 20).then(function (res) {
                 if (res.code == 200) {
                     if (res.body && res.body.length > 0) {
@@ -2954,22 +2942,23 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
     })
-    
-    
-        .controller('RechargeDetailCtrl', function ($scope, Account) {
+
+
+    .controller('RechargeDetailCtrl', function ($scope, Account) {
         $scope.records = [];
         $scope.page = 1;
 
         $scope.doRefresh = function () {
-        	   if ($scope.loading) {
-                   return;
-               }
-               $scope.loading = true;
+            if ($scope.loading) {
+                return;
+            }
+            $scope.loading = true;
             $scope.page = 1;
             Account.getRechargeRecords($scope.page, 20).then(function (res) {
                 if (res.code == 200) {
                     $scope.records = res.body;
-                }   $scope.loading = false;
+                }
+                $scope.loading = false;
             }).finally(function () {
                 $scope.$broadcast('scroll.refreshComplete');
             });
@@ -2977,10 +2966,10 @@ $scope.$on('$ionicView.beforeEnter', function () {
 
         $scope.noMoreItemsAvailable = false;
         $scope.loadMore = function () {
-        	  if ($scope.loading) {
-                  return;
-              }
-              $scope.loading = true;
+            if ($scope.loading) {
+                return;
+            }
+            $scope.loading = true;
             Account.getRechargeRecords($scope.page, 20).then(function (res) {
                 if (res.code == 200) {
                     if (res.body && res.body.length > 0) {
@@ -3001,8 +2990,6 @@ $scope.$on('$ionicView.beforeEnter', function () {
         }
     })
 
-    
-    
 
     .controller('WithdrawHistoryCtrl', function ($scope, Account) {
         $scope.page = 1;
@@ -3050,8 +3037,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
         }
     })
 
-    
-        .controller('WithdrawDetailCtrl', function ($scope, Account) {
+
+    .controller('WithdrawDetailCtrl', function ($scope, Account) {
         $scope.page = 1;
         $scope.records = [];
 
@@ -3096,41 +3083,36 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
     })
-    
-    
+
+
     .controller('RechargeCtrl', function ($rootScope, $scope, $ionicPopup, $state, $ionicActionSheet, UserService, Auth, Pay, $window, myConstants) {
         var userAgent = $window.navigator.userAgent.toLowerCase();
-        $scope.rechargelist="";
+        $scope.rechargelist = "";
         $scope.$on('$ionicView.beforeEnter', function () {
-        	
-        	UserService.getrecharelist().then(function (res) {
-        		var b="10,20,30,50,100,500";
+
+            UserService.getrecharelist().then(function (res) {
+                var b = "10,20,30,50,100,500";
                 if (res.code == 200) {
                     var b = res.msg;
-                     
+
                 }
-                $scope.rechargelist= b.split(",");
-                
-            }) ;
-        	
-        	
-        	
-        	
+                $scope.rechargelist = b.split(",");
+
+            });
+
+
         });
         $scope.payOrder = {};
         var icons = myConstants.IS_APP ? {
             1001: 'ali.png',
             1002: 'wx.png',
-1003: 'qqwap.png'
-        } :{
-             1001: 'ali.png',
-             1002: 'wx.png',
-		     1003: 'qqwap.png'
+            1003: 'qqwap.png'
+        } : {
+            1001: 'ali.png',
+            1002: 'wx.png',
+            1003: 'qqwap.png'
         };
-        var buttons = [
-             
-                       
-        ];
+        var buttons = [];
         for (var i = 0; i < Pay.payChannels.length; i++) {
             if (icons[Pay.payChannels[i]]) {
                 buttons.push({
@@ -3140,7 +3122,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
             }
         }
         var inwx = (/micromessenger/i).test(navigator.userAgent);
-     
+
 
         $scope.doRecharge = function () {
             if (!$scope.payOrder.amount) {
@@ -3155,32 +3137,29 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 titleText: '选择支付方式',
                 buttonClicked: function (index) {
                     //if (myConstants.IS_APP)
-						{
-                          {
+                    {
+                        {
                             Pay.apply(index, $scope.payOrder.amount).then(
-								
-							function(res){
+                                function (res) {
 
-								  if (res.code == 200) {
+                                    if (res.code == 200) {
 
-                                  //   $state.go('tab.submitpay',{paysrc: res.body});
-                                     $window.location.href =  res.body;
-                                     
-								  }
-								  else
-								   {
-									    $ionicPopup.alert({
-                    title: '提示',
-                    template: '充值提交失败，请重新发起'
-                });
-								    }
-							
-							
-							}
+                                        //   $state.go('tab.submitpay',{paysrc: res.body});
+                                        $window.location.href = res.body;
 
-							);
+                                    }
+                                    else {
+                                        $ionicPopup.alert({
+                                            title: '提示',
+                                            template: '充值提交失败，请重新发起'
+                                        });
+                                    }
+
+
+                                }
+                            );
                         }
-                    }  
+                    }
                     return true;
                 }
             });
@@ -3210,94 +3189,80 @@ $scope.$on('$ionicView.beforeEnter', function () {
     })
 
 
-    .controller('WithdrawCtrl', function ($scope, $state,$window, $stateParams, $ionicPopup, Account) {
-        $scope.withdraw ={};
-        $scope.minlimit=10;
-        $scope.maxlimit=500;
-        $scope.limittime="00:00-23:59";
+    .controller('WithdrawCtrl', function ($scope, $state, $window, $stateParams, $ionicPopup, Account) {
+        $scope.withdraw = {};
+        $scope.minlimit = 10;
+        $scope.maxlimit = 500;
+        $scope.limittime = "00:00-23:59";
         $scope.$on('$ionicView.beforeEnter', function () {
             if ($stateParams) {
-            	            	
+
                 $scope.withdraw = $stateParams;
             }
-            
-         
-            
-            Account.getwithdrawtime().then(function(res){
-        		
-       		 if (200 == res.code&& res.msg) {
-                     
-       				$scope.limittime = res.msg;
+
+
+            Account.getwithdrawtime().then(function (res) {
+
+                if (200 == res.code && res.msg) {
+
+                    $scope.limittime = res.msg;
                 }
-       		 
-      		  var isok = true;
-      		
-       		 
-       		var myDate = new Date();
-       		
-       		var timecheck = $scope.limittime.split("-");
-       		
-       		var max =timecheck[1];
-       		var min =timecheck[0];
-       		
-       		var cur=myDate.getHours() + ":"+ myDate.getMinutes();
-       		
-       		if(cur<min || cur>max)
-       			{
-       			
-       			isok = false;
-       			}
-       		  
-       		  
-       		  
-       		  if(isoke==false)
-       			  {
-       			  
-       		  
-       			 $ionicPopup.alert({
-                     title: '提示',
-                     template: '现在不属于金币流转处理时间，请在'+$scope.limittime +"进行金币流转"
-                 });
-       			  
-       			 $state.go('tab.account');
-       			 
-       			 
-       			 
-       			  }
-       		  
-       		 
-       		 
-       		 
-       		 
-       		 
-       		 
-       	});
-            
-            
-            
-            Account.getwithdrawminlimit().then(function(res){
-        		
-         		 if (200 == res.code&& res.msg) {
-                       
-         				$scope.minlimit = res.msg;
-                  }
-         		
-         	});
-           
-            
-            Account.getwithdrawmaxlimit().then(function(res){
-        		
-        		 if (200 == res.code&& res.msg) {
-                      
-        				$scope.maxlimit = res.msg;
-                 }
-        		
-        	});
-          
-            
-            
-            
-            
+
+                var isok = true;
+
+
+                var myDate = new Date();
+
+                var timecheck = $scope.limittime.split("-");
+
+                var max = timecheck[1];
+                var min = timecheck[0];
+
+                var cur = myDate.getHours() + ":" + myDate.getMinutes();
+
+                if (cur < min || cur > max) {
+
+                    isok = false;
+                }
+
+
+                if (isoke == false) {
+
+
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: '现在不属于金币流转处理时间，请在' + $scope.limittime + "进行金币流转"
+                    });
+
+                    $state.go('tab.account');
+
+
+                }
+
+
+            });
+
+
+            Account.getwithdrawminlimit().then(function (res) {
+
+                if (200 == res.code && res.msg) {
+
+                    $scope.minlimit = res.msg;
+                }
+
+            });
+
+
+            Account.getwithdrawmaxlimit().then(function (res) {
+
+                if (200 == res.code && res.msg) {
+
+                    $scope.maxlimit = res.msg;
+                }
+
+            });
+
+
         });
 
         $scope.doWithdraw = function () {
@@ -3309,17 +3274,17 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 });
                 return;
             }
-            if (w.money <   $scope.minlimit) {
+            if (w.money < $scope.minlimit) {
                 $ionicPopup.alert({
                     title: '提示',
-                    template: '提出金额不得低于'+  $scope.minlimit+'元'
+                    template: '提出金额不得低于' + $scope.minlimit + '元'
                 });
                 return;
             }
-            if (w.money >  $scope.maxlimit) {
+            if (w.money > $scope.maxlimit) {
                 $ionicPopup.alert({
                     title: '提示',
-                    template: '提出金额不得高于'+  $scope.minlimit+'元'
+                    template: '提出金额不得高于' + $scope.minlimit + '元'
                 });
                 return;
             }
@@ -3339,8 +3304,8 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 }
             });
         };
-        
-        
+
+
         $scope.doWithdrawCash = function () {
             var w = $scope.withdraw;
             if (!w.money) {
@@ -3350,17 +3315,17 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 });
                 return;
             }
-            if (w.money <   $scope.minlimit) {
+            if (w.money < $scope.minlimit) {
                 $ionicPopup.alert({
                     title: '提示',
-                    template: '提出金额不得低于'+  $scope.minlimit+'元'
+                    template: '提出金额不得低于' + $scope.minlimit + '元'
                 });
                 return;
             }
-            if (w.money >  $scope.maxlimit) {
+            if (w.money > $scope.maxlimit) {
                 $ionicPopup.alert({
                     title: '提示',
-                    template: '提出金额不得高于'+  $scope.minlimit+'元'
+                    template: '提出金额不得高于' + $scope.minlimit + '元'
                 });
                 return;
             }
@@ -3370,13 +3335,13 @@ $scope.$on('$ionicView.beforeEnter', function () {
                         title: '提示',
                         template: '金币流转申请已成功提交,请注意微信查收，若未收到账请联系客服。'
                     }).then(function () {
-                    	
-                    	
-                       //$window.location.href = res.body;
-                        
-                    	$state.go('tab.inframe',{inframe: res.body});
-                        
-                        
+
+
+                        //$window.location.href = res.body;
+
+                        $state.go('tab.inframe', {inframe: res.body});
+
+
                     });
                 } else {
                     $ionicPopup.alert({
@@ -3386,17 +3351,15 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 }
             });
         };
-        
-        
-        
-        
+
+
     })
 
     .controller('LoginCtrl', function ($scope, $state, $ionicPopup, Auth, $rootScope, ThirdPartyLogin) {
         $scope.data = {};
         $scope.apptitle = appTitle;
         $scope.$on('$ionicView.beforeEnter', function () {
-            if(localStorage.autoLogin) {
+            if (localStorage.autoLogin) {
                 $scope.data.username = localStorage.username;
                 $scope.data.password = localStorage.password;
             }
@@ -3417,7 +3380,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                     localStorage.username = $scope.data.username;
                     localStorage.accessToken = res.body.accessToken;
                     localStorage.autoLogin = $scope.data.autoLogin;
-                    if(localStorage.autoLogin){
+                    if (localStorage.autoLogin) {
                         localStorage.password = $scope.data.password;
                     }
                     if ($scope.fromState && $scope.fromState.length > 0) {
@@ -3445,20 +3408,20 @@ $scope.$on('$ionicView.beforeEnter', function () {
             ThirdPartyLogin.apply('wx', extras);
         };
     })
-   .controller('ServicePointCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup) {
+    .controller('ServicePointCtrl', function ($scope, $state, $stateParams, Auth, $window, UserService, $rootScope, $ionicPopup) {
         $scope.records = [];
         $scope.page = 1;
         $scope.data = {};
-        $scope.leveltag =$stateParams.level;
+        $scope.leveltag = $stateParams.level;
         $scope.doRefresh = function () {
-        	Auth.getUser( $rootScope.user.id ).then(function (res) {
+            Auth.getUser($rootScope.user.id).then(function (res) {
                 if (res.code == 200) {
                     var b = res.body;
-                    $scope. user =b;
+                    $scope.user = b;
                 }
             });
             $scope.page = 1;
-            UserService.getProxyServicePoint($scope.page, 20,$scope. $scope.leveltag).then(function (res) {
+            UserService.getProxyServicePoint($scope.page, 20, $scope.$scope.leveltag).then(function (res) {
                 $scope.records = [];
                 if (res.code == 200) {
                     $scope.records = res.body;
@@ -3493,7 +3456,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
         $scope.data = {};
         $scope.doRefresh = function () {
             $scope.page = 1;
-            UserService.getProxyBackWaterRedLogs($scope.page, 20,$scope.data.queryUserId).then(function (res) {
+            UserService.getProxyBackWaterRedLogs($scope.page, 20, $scope.data.queryUserId).then(function (res) {
                 $scope.records = [];
                 if (res.code == 200) {
                     $scope.records = res.body;
@@ -3504,7 +3467,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
         };
         $scope.noMoreItemsAvailable = false;
         $scope.loadMore = function () {
-            UserService.getProxyBackWaterRedLogs($scope.page, 20,$scope.data.queryUserId).then(function (res) {
+            UserService.getProxyBackWaterRedLogs($scope.page, 20, $scope.data.queryUserId).then(function (res) {
                 if (res.code == 200) {
                     if (res.body && res.body.length > 0) {
                         $scope.records = $scope.records.concat(res.body);
@@ -3522,20 +3485,20 @@ $scope.$on('$ionicView.beforeEnter', function () {
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
     })
-    .controller('RegisterCtrl', function ($scope, $state, $ionicPopup, Auth,UserService,$interval,myConstants ,$rootScope) {
+    .controller('RegisterCtrl', function ($scope, $state, $ionicPopup, Auth, UserService, $interval, myConstants, $rootScope) {
         $scope.data = {};
         $scope.vcodeStr = "获取验证码";
-    	$scope.registerWithoutPhoneNo = true;
+        $scope.registerWithoutPhoneNo = true;
         $scope.$on('$ionicView.beforeEnter', function () {
-        	Auth.registerbymoible().then(function(res){
-        		
-        		 if (200 == res.code&& res.msg=="1") {
-                      
-        				$scope.registerWithoutPhoneNo = false;
-                 }
-        		
-        	});
-		
+            Auth.registerbymoible().then(function (res) {
+
+                if (200 == res.code && res.msg == "1") {
+
+                    $scope.registerWithoutPhoneNo = false;
+                }
+
+            });
+
             $scope.showPassword = false;
             UserService.getInvitorId().then(function (res) {
                 if (200 == res.code) {
@@ -3544,49 +3507,50 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 }
             });
         });
-        
-		$scope.sendSmsCode= function () {
-			 if ($scope.vcodeTimeout) {return;}
-			 
-			 
-		
-			  if (!$scope.registerWithoutPhoneNo && (!$scope.data.mobile)) {
-               $ionicPopup.alert({
-                   title: '提示',
-                   template: '手机号不能为空'
-               });
-               return;
-           }
-			 
-		    if (!new RegExp('^1[3-9][0-9]{9}$', 'g').test($scope.data.mobile)) {
-				$ionicPopup.alert({
-					title: '提示',
-					template: '手机号不正确'
-				});
-				return;
-			}
-			   
-           UserService.sendSmsCodebyCheck({mobile: $scope.data.mobile}).then(function (res) {
-               if (200 == res.code) { 
-					 $scope.vcodeTimeout = myConstants.vcodeTimeout;
-					 $scope.vcodeStr = "倒计时"+$scope.vcodeTimeout;
-						$interval(function () {
-							$scope.vcodeTimeout--;
-							$scope.vcodeStr = "倒计时"+$scope.vcodeTimeout;
-							if($scope.vcodeTimeout==0) {
-								$scope.vcodeStr = "获取验证码";
-							}    
-						}, 1000, myConstants.vcodeTimeout);
-					
-               } else {
-                   $ionicPopup.alert({
-                       title: '提示',
-                       template: res.msg
-                   });
-               }
-           });
-       }; 
-		
+
+        $scope.sendSmsCode = function () {
+            if ($scope.vcodeTimeout) {
+                return;
+            }
+
+
+            if (!$scope.registerWithoutPhoneNo && (!$scope.data.mobile)) {
+                $ionicPopup.alert({
+                    title: '提示',
+                    template: '手机号不能为空'
+                });
+                return;
+            }
+
+            if (!new RegExp('^1[3-9][0-9]{9}$', 'g').test($scope.data.mobile)) {
+                $ionicPopup.alert({
+                    title: '提示',
+                    template: '手机号不正确'
+                });
+                return;
+            }
+
+            UserService.sendSmsCodebyCheck({mobile: $scope.data.mobile}).then(function (res) {
+                if (200 == res.code) {
+                    $scope.vcodeTimeout = myConstants.vcodeTimeout;
+                    $scope.vcodeStr = "倒计时" + $scope.vcodeTimeout;
+                    $interval(function () {
+                        $scope.vcodeTimeout--;
+                        $scope.vcodeStr = "倒计时" + $scope.vcodeTimeout;
+                        if ($scope.vcodeTimeout == 0) {
+                            $scope.vcodeStr = "获取验证码";
+                        }
+                    }, 1000, myConstants.vcodeTimeout);
+
+                } else {
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: res.msg
+                    });
+                }
+            });
+        };
+
 
         $scope.doRegister = function () {
             if (!$scope.data.username || !$scope.data.password) {
@@ -3596,7 +3560,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 });
                 return;
             }
-            
+
             if (!$scope.registerWithoutPhoneNo && (!$scope.data.mobile || !$scope.data.smsCode)) {
                 $ionicPopup.alert({
                     title: '提示',
@@ -3604,7 +3568,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 });
                 return;
             }
-            
+
             if ($scope.data.password != $scope.data.password_c) {
                 $ionicPopup.alert({
                     title: '提示',
@@ -3612,13 +3576,13 @@ $scope.$on('$ionicView.beforeEnter', function () {
                 });
                 return;
             }
-           // if (!$scope.data.wx && !$scope.data.mobile && !$scope.data.alipay) {
-             //   $ionicPopup.alert({
-                 //   title: '提示',
-                  //  template: '微信/手机/支付宝请至少选填一项,作为密码找回依据!'
-              //  });
-              //  return;
-           // }
+            // if (!$scope.data.wx && !$scope.data.mobile && !$scope.data.alipay) {
+            //   $ionicPopup.alert({
+            //   title: '提示',
+            //  template: '微信/手机/支付宝请至少选填一项,作为密码找回依据!'
+            //  });
+            //  return;
+            // }
 
             Auth.register($scope.data).then(function (res) {
                 if (200 == res.code) {
@@ -3626,7 +3590,7 @@ $scope.$on('$ionicView.beforeEnter', function () {
                     localStorage.uid = res.body.id;
                     localStorage.username = $scope.data.username;
                     localStorage.accessToken = res.body.accessToken;
-                    if ($scope.fromState && $scope.fromState.length>0 && $scope.fromState.name!='login' ) {
+                    if ($scope.fromState && $scope.fromState.length > 0 && $scope.fromState.name != 'login') {
                         $state.go($scope.fromState.name, $scope.fromParams);
                     } else {
                         $state.go('tab.rooms');

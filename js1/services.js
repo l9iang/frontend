@@ -1,4 +1,3 @@
-
 // ImaxGame游戏社区
 //支持正版，授权冲突，格式化系统，后果自负。
 //iMax游戏爱好者全网独家提供 盗版必究 本代码仅限学习和研究使用 禁止非法用途 责任自负 与本站无关 禁止任何形式的转卖和再分发 监控自动删除
@@ -10,7 +9,7 @@ angular.module('starter.services', [])
         function method(m, url, data) {
             var rq = {
                 method: m,
-                url: myConstants.IS_APP ? myConstants.BASE_URL  + url : '' + url
+                url: myConstants.IS_APP ? myConstants.BASE_URL + url : '' + url
             };
             if (data) {
                 if ('GET' == m) {
@@ -49,7 +48,8 @@ angular.module('starter.services', [])
     .factory('Auth', function ($req, $window, $rootScope) {
         return {
             isSignIn: function (callback) {
-                callback = callback || function () {};
+                callback = callback || function () {
+                };
                 if ($rootScope.user != null && $rootScope.user != undefined) {
                     callback($rootScope.user);
                     return;
@@ -99,34 +99,33 @@ angular.module('starter.services', [])
             register: function (data) {
                 return $req.post('/register', data);
             },
-            registerbymoible:function()
-            {
-            	 return $req.get('/registerbymoible');
+            registerbymoible: function () {
+                return $req.get('/registerbymoible');
             }
         };
     })
 
     .factory('ShopService', function ($req, $window, $rootScope, $timeout) {
         return {
-            shopList: function (pageNo,pageSize) {
+            shopList: function (pageNo, pageSize) {
                 return $req.post('/shop/list', {pageNo: pageNo, pageSize: pageSize});
             },
             get: function (id) {
-                return $req.get('/shop/get',{id:id});
+                return $req.get('/shop/get', {id: id});
             },
-            getContactInfo:function(){
-                return  $req.get('/shop/getContactInfo');
+            getContactInfo: function () {
+                return $req.get('/shop/getContactInfo');
             },
-            doExchange:function(shopId,name,address,mobile){
-                return  $req.post('/shop/doExchange',{shopId:shopId,name:name,address:address,mobile:mobile});
+            doExchange: function (shopId, name, address, mobile) {
+                return $req.post('/shop/doExchange', {shopId: shopId, name: name, address: address, mobile: mobile});
             }
         };
     })
 
     .factory('UserService', function ($req, $window, $rootScope, $timeout) {
         return {
-            getNickName:function(uid){
-                return $req.post('/user/getNickName', {uid:uid});
+            getNickName: function (uid) {
+                return $req.post('/user/getNickName', {uid: uid});
             },
             update: function (data) {
                 return $req.post('/user/update', data);
@@ -143,15 +142,15 @@ angular.module('starter.services', [])
             sendSmsCodebyCheck: function (data) {
                 return $req.post('/user/sendSmsCode_1', data);
             },
-           
-            
+
+
             getPromoteQrcodePoster: function (data) {
                 return $req.post('/user/getPromoteQrcode', data);
             },
             //--
-            
+
             getPromoteQrcode: function (data) {
-                return $req.get('/user/getPromoteQrcode?'+data);
+                return $req.get('/user/getPromoteQrcode?' + data);
             },
             bindMobile: function (data) {
                 return $req.post('/user/bindMobile', data);
@@ -181,16 +180,16 @@ angular.module('starter.services', [])
             getProxyLogs: function (pageNo, pageSize) {
                 return $req.get('/user/proxyLogs', {pageNo: pageNo, pageSize: pageSize});
             },
-            getProxyGamepoint: function (pageNo, pageSize,level) {
-                return $req.get('/user/proxygamepoint', {pageNo: pageNo, pageSize: pageSize,level:level});
+            getProxyGamepoint: function (pageNo, pageSize, level) {
+                return $req.get('/user/proxygamepoint', {pageNo: pageNo, pageSize: pageSize, level: level});
             },
             getProxyRechargeWaterLogs: function (pageNo, pageSize) {
                 return $req.get('/user/proxyrechargewaterLogs', {pageNo: pageNo, pageSize: pageSize});
             },
-            getProxyRechargePoint: function (pageNo, pageSize,level) {
-                return $req.get('/user/proxyrechargepoint', {pageNo: pageNo, pageSize: pageSize,level:level});
+            getProxyRechargePoint: function (pageNo, pageSize, level) {
+                return $req.get('/user/proxyrechargepoint', {pageNo: pageNo, pageSize: pageSize, level: level});
             },
-            getShopExchangeLog:function(pageNo,pageSize){
+            getShopExchangeLog: function (pageNo, pageSize) {
                 return $req.get('/user/exchangeLogs', {pageNo: pageNo, pageSize: pageSize});
             },
             getRoomHistory: function () {
@@ -202,7 +201,7 @@ angular.module('starter.services', [])
             applyRoom: function (data) {
                 return $req.post('/user/roomApply', data);
             },
-            
+
             applyCreateRoom: function (data) {
                 return $req.post('/user/applyCreateRoom', data);
             },
@@ -216,16 +215,20 @@ angular.module('starter.services', [])
                 return $req.get('/user/getInvitorId');
             },
             createUser: function (data) {
-                return $req.post('/user/createUser',data);
+                return $req.post('/user/createUser', data);
             },
             getProxyConfig: function () {
                 return $req.get('/user/proxyConfig');
             },
-            getProxyBackWaterRedLogs: function (pageNo, pageSize,queryUserId) {
-                return $req.get('/user/proxyBackWaterRedLogs', {pageNo: pageNo, pageSize: pageSize, queryUserId:queryUserId});
+            getProxyBackWaterRedLogs: function (pageNo, pageSize, queryUserId) {
+                return $req.get('/user/proxyBackWaterRedLogs', {
+                    pageNo: pageNo,
+                    pageSize: pageSize,
+                    queryUserId: queryUserId
+                });
             },
-            getProxyServicePoint: function (pageNo, pageSize,level) {
-                return $req.get('/user/proxyServicePoint', {pageNo: pageNo, pageSize: pageSize, level:level});
+            getProxyServicePoint: function (pageNo, pageSize, level) {
+                return $req.get('/user/proxyServicePoint', {pageNo: pageNo, pageSize: pageSize, level: level});
             },
             getCreateRoomConfig: function () {
                 return $req.get('/user/roomCreateConfig');
@@ -233,19 +236,19 @@ angular.module('starter.services', [])
             doApply: function () {
                 return $req.get('/user/proxyApply');
             },
-            checkRecharge:function(uid){
-                return $req.post('/user/checkRecharge', {uid:uid});
+            checkRecharge: function (uid) {
+                return $req.post('/user/checkRecharge', {uid: uid});
             },
             prixyRecharge: function (data) {
                 return $req.post('/user/prixyRecharge', data);
             },
-            prixyRechargeLog: function (pageNo,pageSize) {
+            prixyRechargeLog: function (pageNo, pageSize) {
                 return $req.get('/user/prixyRechargeLog', {pageNo: pageNo, pageSize: pageSize});
             },
             prixyUnRecharge: function (data) {
                 return $req.post('/user/prixyUnRecharge', data);
             },
-            prixyUnRechargeLog: function (pageNo,pageSize) {
+            prixyUnRechargeLog: function (pageNo, pageSize) {
                 return $req.get('/user/prixyUnRechargeLog', {pageNo: pageNo, pageSize: pageSize});
             },
             getBankQrcode: function (account) {
@@ -262,9 +265,9 @@ angular.module('starter.services', [])
     })
 
     .factory('configService', function ($req) {
-          	
+
         return {
-        	
+
             getLotteryDescription: function () {
                 return lotteryDescription;
             },
@@ -353,11 +356,11 @@ angular.module('starter.services', [])
             searchRoom: function (roomId) {
                 return $req.get('/room/search/' + roomId);
             },
-            updateProp: function (roomId,proid,key,value) {
-                return $req.post('/room/updateProp', {roomId:roomId,proid:proid,key:key,value:value});
+            updateProp: function (roomId, proid, key, value) {
+                return $req.post('/room/updateProp', {roomId: roomId, proid: proid, key: key, value: value});
             },
-            updateRoomProp:function (roomId,key,value) {
-                return $req.post('/room/updateRoomProp', {roomId:roomId,key:key,value:value});
+            updateRoomProp: function (roomId, key, value) {
+                return $req.post('/room/updateRoomProp', {roomId: roomId, key: key, value: value});
             }
         };
     })
@@ -425,21 +428,21 @@ angular.module('starter.services', [])
         return {
             payChannels: function () {
                 if (myConstants.IS_APP) {
-                    return [1001,1002,1003];
+                    return [1001, 1002, 1003];
                     //return [33, 31];
                 } else {
-                     return [1001,1002,1003];
+                    return [1001, 1002, 1003];
                 }
             }(),
 
             apply: function (index, totalFee) {
-               // if (myConstants.IS_APP)
-			   {
-                  return   $req.post('/pay/apply/mzf', {
+                // if (myConstants.IS_APP)
+                {
+                    return $req.post('/pay/apply/mzf', {
                         payChannel: this.payChannels[index],
                         totalFee: totalFee
                     });
-                } 
+                }
             },
 
             applyWx: function (totalFee) {
@@ -493,13 +496,13 @@ angular.module('starter.services', [])
             }
         }
     })
-//支持正版，授权冲突，格式化系统，后果自负。
+    //支持正版，授权冲突，格式化系统，后果自负。
     .factory('Account', function ($req) {
         return {
             getBankCards: function () {
                 return $req.get('/user/bankRecords');
             },
-            
+
             getRechargeRecords: function (page, pageSize) {
                 return $req.get('/user/rechargeRecords', {pageSize: pageSize, pageNo: page});
             },
@@ -515,19 +518,19 @@ angular.module('starter.services', [])
                 return $req.post('/cash/withdraw', data);
             },
             getwithdrawminlimit: function () {
-                return $req.get('/user/withdraw/minlimit' );
+                return $req.get('/user/withdraw/minlimit');
             },
             getwithdrawmaxlimit: function () {
-                return $req.get('/user/withdraw/maxlimit' );
+                return $req.get('/user/withdraw/maxlimit');
             },
             getwithdrawtime: function () {
-                return $req.get('/user/withdraw/time' );
+                return $req.get('/user/withdraw/time');
             }
-            
+
         };
     })
-     
-     .factory('PcEggforJnd', function ($req) {
+
+    .factory('PcEggforJnd', function ($req) {
         return {
             getRates: function () {
                 return $req.get('/ratesforjnd');
@@ -536,16 +539,13 @@ angular.module('starter.services', [])
             bet: function (data) {
                 return $req.post('/pc/betforjnd', data);
             },
-            getPcEggLog: function (pageNo,pageSize) {
+            getPcEggLog: function (pageNo, pageSize) {
                 return $req.get('/pc/getPcEggLogforjnd', {pageNo: pageNo, pageSize: pageSize});
             }
 
         };
     })
-    
-    
 
-    
 
     .factory('PcEgg', function ($req) {
         return {
@@ -556,7 +556,7 @@ angular.module('starter.services', [])
             bet: function (data) {
                 return $req.post('/pc/bet', data);
             },
-            getPcEggLog: function (pageNo,pageSize) {
+            getPcEggLog: function (pageNo, pageSize) {
                 return $req.get('/pc/getPcEggLog', {pageNo: pageNo, pageSize: pageSize});
             }
 

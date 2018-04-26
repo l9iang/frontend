@@ -27,9 +27,8 @@
                      ngf-resize="{width: 100, height: 100}">上传头像</div>-->
             </ion-item>
             <ion-item class="row">
-                <div class="col text-center" ui-sref="tab.rooms">游戏大厅</div>
-                <!--<div class="col text-center" ui-sref="tab.history">我的足迹</div>-->
                 <div class="col text-center" ui-sref="tab.account-recharge">充值</div>
+                <div class="col text-center" ui-sref="tab.account-cards({target:'tab.account-withdraw'})">提现</div>
             </ion-item>
             <ion-item class="item-divider"></ion-item>
 
@@ -39,7 +38,7 @@
                 <i class="icon ion-ios-arrow-right item-note"></i>
 			</ion-item>
 			    <ion-item class="item-divider"></ion-item>
-            
+
 			<ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-manager">
                 <i class="icon ion-person"></i>
                 帐号管理<span style="font-size: 14px;color:orangered;font-weight: bold;">(ID:{{user.id}})</span>
@@ -48,19 +47,19 @@
 
 
 <ion-item ng-if="user.userType=='2'" class="item-icon-left item-icon-right item item-complex"
- ui-sref="tab.account-proxy-promote"> 
+ ui-sref="tab.account-proxy-promote">
                 <i class="icon ion-ios-film-outline"></i>
                 	 代理二维码海报生成
                 <i class="icon ion-ios-arrow-right item-note"></i>
             </ion-item>
-			
+
             <ion-item ng-if="user.userType=='2'" class="item-icon-left item-icon-right" ui-sref="tab.account-proxy">
                 <i class="icon ion-person-add"></i>
                 我是代理
                 <i class="icon ion-ios-arrow-right item-note"></i>
             </ion-item>
 
-			
+
             <ion-item ng-if="user.userType=='1'" class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-apply">
                 <i class="icon ion-person-add"></i>
                 申请代理
@@ -71,7 +70,7 @@
             <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-rooms">
                 <i class="icon ion-home"></i>
                 <div class="clearfix">
-                    <span style="float: left;">我的房间(<span ng-bind="roomCount ? roomCount : 0">0</span>)</span> 
+                    <span style="float: left;">我的房间(<span ng-bind="roomCount ? roomCount : 0">0</span>)</span>
                     <span class="item-note room-note" ng-if="roomCount > 0">看看房间的收益</span>
                     <span class="item-note room-note" ng-if="!roomCount">创建房间邀好友</span>
                 </div>
@@ -86,7 +85,7 @@
             -->
           <ion-item class="item-divider"></ion-item>
 		 <ion-item class="item-icon-left item-icon-right item item-complex" ui-sref="tab.account-detail" >
-		 
+
           <i class="icon ion-social-windows"></i>
               	  账户统计
                 <i class="icon ion-ios-arrow-right item-note"></i>
@@ -96,17 +95,17 @@
                发包记录
                 <i class="icon ion-ios-arrow-right item-note"></i>
             </ion-item>
-			
+
             <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-bonus-detail">
                 <i class="icon ion-ios-star"></i>
                 抢包记录
                 <i class="icon ion-ios-arrow-right item-note"></i>
             </ion-item>
-			
+
          <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-bonus03-detail">
                 <i class="icon ion-ios-game-controller-b-outline"></i>北京28记录
                 <i class="icon ion-ios-arrow-right item-note"></i>
-            </ion-item> 
+            </ion-item>
 
                <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-bonus30-detail">
                 <i class="icon  ion-ios-game-controller-b"></i>
@@ -114,16 +113,16 @@
                 <i class="icon ion-ios-arrow-right item-note"></i>
             </ion-item>
               <ion-item class="item-divider"></ion-item>
-            
+
             <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-recharge-history">
                 <i class="icon ion-card"></i>
                 我的充值记录
                 <i class="icon ion-ios-arrow-right item-note"></i>
             </ion-item>
 
-            <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-rechargeAndWithdraw">
+            <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-withdraw-history">
                 <i class="icon ion-card"></i>
-                金币充值金币流转
+                我的提现记录
                 <i class="icon ion-ios-arrow-right item-note"></i>
             </ion-item>
              <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-WithdrawQrCode">
@@ -136,8 +135,8 @@
                 <i class="icon ion-arrow-return-right"></i>
                 对内对外转账
                 <i class="icon ion-ios-arrow-right item-note"></i>
-            </ion-item> 
-			
+            </ion-item>
+
             <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-exchange">
                 <i class="icon ion-bag"></i>
                 礼品兑换记录
@@ -149,7 +148,7 @@
                 注销帐户退出
                 <i class="icon ion-ios-arrow-right item-note"></i>
             </ion-item>
-            
+
             <ion-item class="item-icon-left item-icon-right item ng-binding">
                <i class="icon ion-ios-game-controller-b-outline"></i>
                	版本 v25.6[全网独家 高度集成  数据和资金更安全 内核级别升级]
@@ -159,6 +158,6 @@
 				<a href="/jubao" style="text-decoration:none;color:#DCDCDC">投诉</a><br/><br/>
 			</center>
         </ion-list>
-        
+
     </ion-content>
 </ion-view>
