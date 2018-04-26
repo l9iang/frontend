@@ -1,0 +1,44 @@
+<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+
+<!-- 
+
+  imaxgame
+ 支持正版，授权冲突，格式化系统，后果自负。
+iMax游戏爱好者全网独家提供 盗版必究 本代码仅限学习和研究使用 禁止非法用途 责任自负 与本站无关 禁止任何形式的转卖和再分发 监控自动删除
+  定制化或者二次开发 联系qq：2035450966
+ 
+
+ -->
+<ion-tabs class="tabs-icon-top tabs-color-active-positive" ng-class="{'tabs-item-hide': hideTabs}">
+
+  <!-- Dashboard Tab -->
+  <ion-tab title="大厅" class="tab-green" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/tab/rooms">
+    <ion-nav-view name="tab-rooms"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Chats Tab -->
+  <ion-tab title="优惠活动" class="tab-green" icon-off="ion-ios-cart-outline" icon-on="ion-ios-cart" href="#/tab/shop">
+    <ion-nav-view name="tab-shop"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="主页" class="tab-green" icon-off="ion-ios-monitor-outline" icon-on="ion-ios-people" href="#/index">
+    <ion-nav-view name="index"></ion-nav-view>
+  </ion-tab>
+  <ion-tab title="在线客服" class="tab-green" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" href="#/kf">
+    <ion-nav-view name="tab-kf"></ion-nav-view>
+  </ion-tab>
+  <!-- Account Tab -->
+  <ion-tab title="我的账户" class="tab-green" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
+    <ion-nav-view name="tab-account"></ion-nav-view>
+  </ion-tab>
+
+  <!--<ion-tab title="更多" icon-off="ion-ios-more-outline" icon-on="ion-ios-more">-->
+
+  <!--</ion-tab>-->
+
+
+</ion-tabs>

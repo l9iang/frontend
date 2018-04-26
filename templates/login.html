@@ -1,0 +1,55 @@
+
+<!-- 
+
+  imaxgame
+ 支持正版，授权冲突，格式化系统，后果自负。
+iMax游戏爱好者全网独家提供 盗版必究 本代码仅限学习和研究使用 禁止非法用途 责任自负 与本站无关 禁止任何形式的转卖和再分发 监控自动删除
+  定制化或者二次开发 联系qq：2035450966
+ 
+
+ -->
+ 
+ <ion-view view-title="登录" class="l-login-bj">
+	
+    <ion-content>
+		<div class="l-login-title l-margin-{{$parent.platform}}">
+			<a class="center"> 会员登录 </a>
+			<a ui-sref="index" class="left"> <i class="i i-back"></i> </a>
+		</div>
+		
+        <div class="list list-inset l-login-list"  >
+            <label class="item item-input">
+                <input type="text" placeholder="请输入登陆帐号" ng-model="data.username"  autocomplete="off" >
+				<h1 class="i i-user"></h1>
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="请输入登陆密码" ng-model="data.password" autocomplete="off" >
+				<h1 class="i i-pass"></h1>
+            </label>
+
+            <ul class="list l-hide">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="data.autoLogin" checked>
+                    </label>
+                    记住账号和密码
+                </li>
+                </ul>
+            <button class="button button-block button-positive tab-green reg min" ui-sref="register">
+                去注册
+            </button>
+			<button class="button button-block button-positive tab-green max" ng-click="doLogin()">
+                登录
+            </button>
+            <!--  <div class="third-login">
+                <label class="third-login-title">第三方登录</label>
+                <img class="third-login-wx" src="../img/login/appwx.png" ng-click="loginWx()">
+            </div>  -->
+		</div>
+		 <div class="third-login">
+                <label class="third-login-title">第三方登录</label>
+			<a href="http://wx.re36.cn/plugin/wxlogin/index/index.html?sid=601">
+                <img class="third-login-wx" src="../img/login/appwx.png"></a>
+            </div>  
+    </ion-content>
+</ion-view>

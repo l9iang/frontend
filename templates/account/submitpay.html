@@ -1,0 +1,16 @@
+<ion-view view-title="充值">
+      <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+        <ion-nav-buttons>
+            <button class="button back-button buttons button-clear header-item" ui-sref="tab.account">
+                我的帐户
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content scroll="true" overflow-scroll="true">
+	  <div class="padding" style="background-color: #F1E9CF;color:#8E7525;margin: 1px;">
+             实际充值金额需要和当前二维码上方显示金额一致，否则可能导致错误，请联系客服
+        </div>
+        <iframe  ng-src='{{paysrc}}' class="width-100 height-100" style="min-width: 100%; min-height: 100%;" ></iframe>
+    </ion-content>
+</ion-view>

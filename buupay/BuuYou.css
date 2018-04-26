@@ -1,0 +1,35 @@
+﻿@CHARSET "UTF-8";
+
+<!-- css布局文件  -->
+
+    html,body {
+        width:100%;
+        min-width:100%;
+        height:auto;
+        padding:0;
+        margin:0;
+        font-family:"微软雅黑";
+        background-color:#FFFFFF
+    }    
+    .buuyouform {
+        width:720px;
+        margin:0 auto;
+        height:100%;
+		margin-top:5px;
+		
+    }    
+    
+    .tab
+    {
+        border-collapse: collapse;
+        width: 500px;
+        border: #999 1px dashed;
+    }
+    .tab td
+    {
+        padding: 5px;
+        border: 1px solid #0ae;
+        padding-left:25px
+    }
+    
+		

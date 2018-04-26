@@ -1,0 +1,64 @@
+<ion-view view-title="账户统计信息" need-login hide-tabs="false">
+    <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+        <ion-nav-back-button>返回</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="下拉刷新余额..." on-refresh="doRefresh()"></ion-refresher>
+        <ion-list>
+		
+             <ion-item class="item-thumbnail-left">
+                <img ng-src="{{user.headImg}}" style="border-radius: 40px;">
+                <div style="padding-top: 18px;">
+                    <h2>{{user.nickName}}</h2>
+                    <p><img src="img/gold.png" width="15" height="15" ><span style="display: inline-block; margin-left: 5px; color: red;">{{user.money}}</span></p>
+                </div>
+            </ion-item>
+           <div class="list">
+                <div class="menu2">
+  <table width="100%" border="0" cellspacing="1" cellpadding="0">
+
+    <tr>
+      <td height="35" width="33%" align="center" valign="middle"   ui-sref="tab.account-detail">
+      <span class="STYLE26">账户统计</span><br>
+      <span class="en1">USERS INFO</span></td>
+      <td align="center" width="34%" valign="middle"   ui-sref="tab.account-recharge-detail"><span class="STYLE26">充值记录</span><br>
+      <span class="en1">RECHARGE RECORD</span></td>
+      <td align="center" width="33%" valign="middle"  style="background-color: #222"  ui-sref="tab.account-withdraw-detail"><span class="STYLE26">金币流转记录</span><br>
+      <span class="en1">WITHDRAW RECORD</span></td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="weizhi">　金币流转记录 WITHDRAW RECORD</div>
+<div class="yi-normal">
+  <div>
+      <table width="100%" border="0" cellpadding="0" cellspacing="1" class="withdrawtable">
+        <tr>
+          <td width="25%" class="userinfo1">金币流转金币</td>
+          <td width="23%" class="userinfo1">账号名称</td>
+          <td width="23%" class="userinfo1">金币流转状态</td>
+          <td width="29%" align="center" valign="middle" class="userinfo1">金币流转时间</td>
+        </tr>
+		
+		<tr ng-if="records.length==0">
+          <td height="30" colspan="4" align="center" valign="middle" bgcolor="#FFFFFF">没有记录! </td>
+        </tr>
+		<tr ng-repeat="r in records"  >
+          <td bgcolor="#FFFFFF">{{r.fee.toFixed(2)}} </td>
+           <td bgcolor="#FFFFFF">   {{r.bankName}}</td>
+            <td bgcolor="#FFFFFF" class="withdraw-status withdraw-status-{{r.status}}">  {{r.status == '2' ? '金币流转成功' : r.status == '1' ? '审核中' : '金币流转失败'}} </td>
+             <td bgcolor="#FFFFFF">{{r.finishtime}}</td>
+        </tr>
+      </table>
+	  <br>
+  </div>
+</div>
+
+           </div>
+			
+ 
+        </ion-list>
+          <ion-infinite-scroll on-infinite="loadMore()" ng-if="!noMoreItemsAvailable"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

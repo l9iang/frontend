@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+ <script src="sp.js"></script>
+             <html>
+<head>
+    <meta charset="UTF-8">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>投诉</title>
+    <link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css"/>
+  <script type="text/javascript">
+    // 对浏览器的UserAgent进行正则匹配，不含有微信独有标识的则为其他浏览器
+    var useragent = navigator.userAgent;
+    if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+        // // 这里警告框会阻塞当前页面继续加载
+        // alert('已禁止本次访问：您必须使用微信内置浏览器访问！');
+        // // 以下代码是用javascript强行关闭当前页面
+        // var opened = window.open('about:blank', '_self');
+        // opened.opener = null;
+        // opened.close();
+    }
+    
+    
+    function closewinpage()
+    {
+    if (typeof WeixinJSBridge != "undefined"){
+   
+    WeixinJSBridge.invoke('closeWindow');
+    }
+    else
+    {
+      
+       window.location.href="about:blank";
+       window.close();
+    }
+    }
+</script>  
+</head>
+<body class="" ontouchstart debug="" wechat_real_lang="" scene="">
+<!-- ﻿<script src="http://wx.xueyangou.net/protect.js"></script> -->
+<div class="weui-msg">
+    <div class="weui-msg__icon-area">
+                <i class="weui-icon-success weui-icon_msg"></i>
+            </div>
+    <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">投诉已提交</h2>
+        <p class="weui-msg__desc">微信团队会尽快核实，并通过“微信团队”通知你审核结果。感谢你的支持。</p>
+
+            </div>
+    <div class="weui-msg__opr-area">
+        <p class="weui-btn-area">
+                        <a href="#" onclick="closewinpage()" class="weui-btn weui-btn_primary">关闭</a>
+                    </p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    !function(w, b){
+        w.WX110 = {
+            BASE_PATH: "/security/readtemplate?wechat_real_lang=zh_CN&t=weixin_report",
+
+            TEXT_NETWORKERR: "网络错误，请稍后再试",
+
+            FUNC_GOTO: function(page){
+                location.href = this.BASE_PATH + page
+            }
+        };
+    }(window, document.body);
+</script>
+
+
+</body>
+</html>

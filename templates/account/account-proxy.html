@@ -1,0 +1,85 @@
+<ion-view view-title="邀请小伙伴" need-login>
+   <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+       <ion-nav-buttons>
+            <button class="button button-clear" ui-sref="tab.account">返回</button>
+        </ion-nav-buttons>
+        
+    </ion-nav-bar>
+
+
+    <ion-content>
+
+        <div class="list list-inset" align="center">
+            <span style="color:grey;margin-left: 20px;">辣么好玩的游戏,赶紧转发给小伙伴吧~</span>
+            <div align="center"><img  src="{{user.invitImg}}"></div>
+            <label class="item item-input">
+                邀请： <input type="text" ng-model="user.url">
+            </label>
+        </div>
+
+        <ion-list>
+            <ion-item class="item-divider"></ion-item>
+<ion-item  class="item-icon-left item-icon-right item item-complex"
+ ui-sref="tab.account-proxy-promote"> 
+                <i class="icon ion-ios-film-outline"></i>
+                	 生成二维码推广海报
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>
+            <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-create">
+                <i class="icon ion-android-add"></i>
+                                       创建账号
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>
+
+            <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-users">
+                <i class="icon ion-person-stalker"></i>
+                我邀请的人
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>
+      
+            <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-gamepoint({level:1})">
+                <i class="icon ion-ios-heart-outline"></i>
+                             游戏提成业绩
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>
+            
+           
+           <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-servicepoint({level:1})">
+                <i class="icon ion-ios-heart"></i>
+                              服务费返佣业绩
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>  
+               <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-rechargepoint({level:1})">
+                <i class="icon ion-ios-flask-outline""></i>
+                              充值提成业绩
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>
+            
+         <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-recharge-do">
+                <i class="icon ion-arrow-up-a"></i>
+                代理上分 </span>
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>
+            <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-recharge-log">
+                <i class="icon ion-android-clipboard"></i>
+                上分记录
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>
+            <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-unRecharge-do">
+                <i class="icon ion-arrow-down-a"></i>
+                代理下分 </span>
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>
+            <ion-item class="item-icon-left item-icon-right" ui-sref="tab.account-proxy-unRecharge-log">
+                <i class="icon ion-android-clipboard"></i>
+                下分记录
+                <i class="icon ion-ios-arrow-right item-note"></i>
+            </ion-item>
+              <center><br>
+				<a href="/jubao" style="text-decoration:none;color:#DCDCDC">投诉</a><br>
+			</center>
+        </ion-list>
+
+      
+    </ion-content>
+</ion-view>

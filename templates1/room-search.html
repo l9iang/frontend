@@ -1,0 +1,16 @@
+<ion-modal-view class="lottery-view">
+  <ion-header-bar class="bar-assertive" align-title="center">
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeModal()">关闭</button>
+    </div>
+    <h1 class="title">房间搜索</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" placeholder="请输入房间号" ng-model="roomId">
+      </label>
+      <button class="button button-block button-positive button-green" ng-click="searchRoom(roomId)">进入</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

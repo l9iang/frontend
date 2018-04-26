@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<organ name="technology company">
+    <properties>
+        <p name="address">硅谷。加州</p>
+        <p name="telephone">400-xxx-xxxx</p>
+        <p name="system">iMaxGame娱乐管理系统</p>
+        <p name="version">V25.6</p>
+         <p name="iconUrl">img/pay.jpg</p>
+        <p name="company">iMaxClub</p>
+        <p name="email">meng201809@foxmail.com</p>
+    </properties>
+    <installedApps>
+        <app id="app.lottery"/>
+        <app id="app.system"/>
+    </installedApps>
+    <unit id="default" name="iMax娱乐">
+
+    </unit>
+</organ>

@@ -1,0 +1,57 @@
+
+<ion-view view-title="首页" class="l-index-bj">
+
+    <ion-content>
+		<div class="l-index-hear l-top-{{$parent.platform}}">
+			<div class="kj">
+				<div class="li" ui-sref="tab-account">
+			 
+					<img src='{{user.headImg?user.headImg:"img/avatar.png"}}' class="img"/>
+					<span ng-if="user.id">
+						<h1 class="name">{{user.nickName}}</h1>
+						<h1 class="name id">ID {{user.id}}</h1>
+					</span>
+				 
+				</div>
+				<div class="li anima-1x" ng-if="user.id">
+					<div class="money">
+						<img src="img/jb.png">
+						{{user.money}} 
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="index_gg">
+			<div class="title">
+				<marquee direction="left" behavior="scroll" scrollamount="7" scrolldelay="0" loop="-1">
+				{{notice }}
+				</marquee>
+			
+			</div>
+			<span style="display:none;">
+				<h1 ng-repeat="g in gg" ng-click="opengg(g.title,g.body,g.time)">
+					<i ng-show="g.hot > 0">[置顶]</i> {{ g.title }}
+				</h1>
+			</span>
+		</div>
+		
+		<div class="l-index-bottom">
+			<a  href="#/tab/rooms" class="anima-2x">
+				<img src="img/hong.png">
+				<p>红包大厅</p>
+			</a>
+			<a  href="#/tab/shop" class="anima-3x">
+				<img src="img/store.png">
+				<p>优惠活动</p>
+			</a>
+			<a  href="#/tab/account" class="anima-4x">
+				<img src="img/my.png">
+				<p>个人信息</p>
+			</a>
+		</div>
+    </ion-content>
+</ion-view>
+	
+
+
+

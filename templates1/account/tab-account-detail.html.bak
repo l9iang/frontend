@@ -1,0 +1,116 @@
+<ion-view view-title="账户统计信息" need-login hide-tabs="false">
+    <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+        <ion-nav-back-button>返回</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="下拉刷新余额..." on-refresh="doRefresh()"></ion-refresher>
+        <ion-list>
+		
+             <ion-item class="item-thumbnail-left">
+                <img ng-src="{{user.headImg}}" style="border-radius: 40px;">
+                <div style="padding-top: 18px;">
+                    <h2>{{user.nickName}}</h2>
+                    <p><img src="img/gold.png" width="15" height="15" ><span style="display: inline-block; margin-left: 5px; color: red;">{{user.money}}</span></p>
+                </div>
+            </ion-item>
+           <div class="list">
+                <div class="menu2">
+  <table width="100%" border="0" cellspacing="1" cellpadding="0">
+
+    <tr>
+      <td width="33%"  style="background-color: #222"   ui-sref="tab.account-detail">
+      <span class="STYLE26">账户统计</span><br>
+      <span class="en1">USERS INFO</span></td>
+      <td align="center" width="34%" valign="middle"  ui-sref="tab.account-recharge-detail"><span class="STYLE26">充值记录</span><br>
+      <span class="en1">RECHARGE RECORD</span></td>
+      <td align="center" width="33%" valign="middle"   ui-sref="tab.account-withdraw-detail"><span class="STYLE26">金币流转记录</span><br>
+      <span class="en1">WITHDRAW RECORD</span></td>
+    </tr>
+  </table>
+</div>
+<div class="weizhi">　账户统计 USERS INFO</div>
+<div class="yi-normal">
+  <div>
+    <table width="100%" border="1" cellspacing="1" cellpadding="0" class="userinfotable">
+	
+      <tr>
+        <td   class="userinfo">用户ID</td>
+        <td   class="userinfo">用户昵称</td>
+      </tr>
+      <tr>
+        <td  >{{user.id}}</td>
+        <td  >{{user.nickName}}</td>
+      </tr>
+      <tr>
+        <td   class="userinfo">账户余额</td>
+        <td   class="userinfo">累计总返点</td>
+      </tr>
+      <tr>
+        <td  >{{user.money?user.money:0}}</td>
+        <td  >{{user.point?user.point:0}}</td>
+      </tr>
+        <tr>
+        <td   class="userinfo">累计游戏提成</td>
+        <td   class="userinfo">累计服务费返水</td>
+      </tr>
+      <tr>
+        <td  >{{user.gamepoint?user.gamepoint:0}}</td>
+        <td  >{{user.servicepoint?user.servicepoint:0}}</td>
+      </tr>
+         <tr>
+        <td   class="userinfo">累计充值提成</td>
+        <td   class="userinfo">当前押金</td>
+      </tr>
+      <tr>
+        <td  >{{user.rechargepoint?user.rechargepoint:0}}</td>
+        <td  >{{user.exp?user.exp:0}}</td>
+      </tr>
+      <tr>
+        <td   class="userinfo">累计充值</td>
+        <td   class="userinfo">累计金币流转</td>
+      </tr>
+      <tr>
+        <td  >{{user.rechagevalue?user.rechagevalue:0}}</td>
+        <td  >{{user.withdrawvalue?user.withdrawvalue:0}}</td>
+      </tr>
+      <tr>
+        <td   class="userinfo">累计赢额</td>
+        <td   class="userinfo">累计输额</td>
+      </tr>
+      <tr>
+        <td >{{user.winvalue?user.winvalue:0}}</td>
+        <td >{{user.losevalue?user.losevalue:0}}</td>
+            
+        </td>
+      </tr>
+	  
+      <tr>
+        <td  class="userinfo">累计发包数量</td>
+        <td  class="userinfo">累计发包金额</td>
+      </tr>
+      <tr>
+        <td >{{user.sendnum?user.sendnum:0}}</td>
+        <td >{{user.sendmoney?user.sendmoney:0}}</td>
+      </tr>
+	  
+	   <tr>
+        <td  class="userinfo">累计抢包数量</td>
+        <td  class="userinfo">累计抢包金额</td>
+      </tr>
+      <tr>
+        <td >{{user.opennum?user.opennum:0}}</td>
+        <td >{{user.openmoney?user.openmoney:0}}</td>
+      </tr>
+	  
+
+       
+    </table>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br>
+</div>
+            </div>
+			
+ 
+        </ion-list>
+    </ion-content>
+</ion-view>

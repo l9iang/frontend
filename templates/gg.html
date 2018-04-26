@@ -1,0 +1,28 @@
+<ion-modal-view>
+<div class="l-head-{{$parent.platform}} l-back">
+	<div class="l-div-{{$parent.platform}} l-back"></div>	
+	<ion-header-bar align-title="left" class="bar-positive">
+		<div class="home-nav l-back">
+            <div class="nav-buttons clearfix">
+                <div class="home-title">
+					<i class="left i i-close" ng-click="closegg()"></i>
+                    <span>公告详情</span>
+                </div>
+            </div>
+        </div>
+	</ion-header-bar>
+
+    <ion-content>
+		<div style="padding:20px">
+			<h1 style="font-size:16px;color:#333;margin-top:10px;font-weight:normal">{{ggInfo.title}}</h1>
+			<h2 style="font-size:12px;color:#aaa;font-weight:normal">{{ggInfo.time}}</h2>
+			<p style="font-size:14px;color:#777;margin-top:20px">{{ ggInfo.body }}</p>
+		</div>
+    </ion-content>
+</div>
+</ion-modal-view>
+	
+
+
+
+ 

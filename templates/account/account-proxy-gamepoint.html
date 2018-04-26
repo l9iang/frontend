@@ -1,0 +1,64 @@
+<ion-view view-title="游戏提成统计" need-login hide-tabs="false">
+   <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+       <ion-nav-buttons>
+            <button class="button button-clear" ui-sref="tab.account-proxy">返回</button>
+        </ion-nav-buttons>
+        
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="下拉刷新余额..." on-refresh="doRefresh()"></ion-refresher>
+        <ion-list>
+		 
+           <div class="list">
+           <div class="weizhi">&nbsp;&nbsp;截至今天,累计玩家游戏累计提成 【{{user.gamepoint}}】</div>
+                <div class="menu2">
+  <table width="100%" border="0" cellspacing="1" cellpadding="0">
+
+    <tr>
+      <td height="35" width="33%" align="center" valign="middle"   style="background-color: {{leveltag==1?'#222':''}}"    ui-sref="tab.account-proxy-gamepoint({level:1})">
+      <span class="STYLE26">一级用户提成</span><br>
+      <span class="en1">ONE LEVEL</span></td>
+      <td align="center" width="34%" valign="middle"  style="background-color: {{leveltag==2?'#222':''}}"    ui-sref="tab.account-proxy-gamepoint({level:2})"><span class="STYLE26">二级用户提成</span><br>
+      <span class="en1">TWO LEVEL</span></td>
+      <td align="center" width="33%" valign="middle"  style="background-color: {{leveltag==3?'#222':''}}"    ui-sref="tab.account-proxy-gamepoint({level:3})"><span class="STYLE26">三级用户提成</span><br>
+      <span class="en1">THREE LEVEL</span></td>
+    </tr>
+  </table>
+</div>
+
+<div class="yi-normal">
+  <div>
+      <table width="100%" border="0" cellpadding="0" cellspacing="1" class="rechargetalbe" >
+        <tr>
+          <td width="20%"   class="userinfo2">提成金额</td>
+           <td width="20%"   class="userinfo2">下级输赢</td>
+          <td width="30%"   class="userinfo2">下级玩家</td>
+          <td width="30%"   class="userinfo2">统计日期</td>
+        </tr>
+		
+		<tr ng-if="records.length==0">
+          <td  colspan="4" >没有记录! </td>
+        </tr>
+        <!-- 1 自动充值  2 代理上分 3 代理下分 -->
+		<tr ng-repeat="r in records">
+          <td    >{{r.vote}} </td>
+           <td    >-{{r.lose}}</td>
+            <td   >{{r.nickName}}(ID:{{r.uid}})</td>
+               
+              <td >{{r.cacuDate|date:'yyyy-MM-dd'}}&nbsp;</td>
+        </tr>
+      </table>
+  </div>
+</div>
+
+
+
+
+            </div>
+			
+ 
+        </ion-list>
+        <ion-infinite-scroll on-infinite="loadMore()" ng-if="!noMoreItemsAvailable">
+    </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

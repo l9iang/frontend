@@ -1,0 +1,98 @@
+
+<!-- 
+
+  imaxgame
+ 支持正版，授权冲突，格式化系统，后果自负。
+iMax游戏爱好者全网独家提供 盗版必究 本代码仅限学习和研究使用 禁止非法用途 责任自负 与本站无关 禁止任何形式的转卖和再分发 监控自动删除
+  定制化或者二次开发 联系qq：2035450966
+ 
+
+ -->
+<ion-view>
+    <ion-content class="home-body">
+        <div class="main_wrap">
+          
+                 <div class="l-account-hear">
+			
+		   <div class="left">
+		      <div>ID:{{user.id?user.id:""}}</div>
+		     <div>昵称：{{(user.nickName?user.nickName:"游客") | limitTo:6 }}</div>
+		   </div>
+		 
+            <div class="mid">
+            <img ng-src="{{user?user.headImg:'/img/avatar.png'}}"  class="img" ui-sref='tab.account'></img>
+				
+            </div>
+			<div class="right">
+			<div class="j"><img height="16" src="img/gold.png"/>金币：{{user.money}}</div>  
+            <div class="j"><img height="14" src="img/icon/users.png"/>在线：{{onlineCount}}</div>  
+			</div>
+		    </div>
+            
+            
+            <div class="notice">
+                <div class="notice_inner">
+                    <ul>
+                        <li style="line-height: 30px;    height: 30px;">
+                           <!--  <marquee behavior="scroll">新版牛牛已悄悄上线了，你发现了吗？请认准正版,以免您的财产受到损失!搭建联系qq：2035450966</marquee> -->
+                            <div id="scrollobj" style="white-space:nowrap;overflow:hidden;"><span></span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+         
+            <div class="home-cover">
+                <div class="wrapper">
+                    <div class="marquee" ng-class="{'run':run}">
+                        <img ng-src="{{img}}" ng-repeat="img in marquee">
+                    </div>
+                </div>
+            </div>
+            
+            
+             <div class="list list-inset"  ng-show="hidesearch==1" >
+      <label class="item item-input">
+        <input type="text" placeholder="请输入房间号查找房间" ng-model="roomId">
+      </label>
+      <button class="button button-block button-positive button-green" ng-click="searchRoom(roomId)">进入</button>
+    </div>
+    
+    
+            <div class="module game"  ng-repeat="gameType in gameTypes" ng-if="rooms[gameType.key] && rooms[gameType.key].length">
+                <div class="inner">					
+                    <div class="game_img" ng-click="showGameType(gameType.key)">
+                        <a href="">
+                            <img ng-src="{{'img/home/game_'+ gameType.key  +'.png'}}"/>
+                            <div class="text">
+                                <div class="inner">
+                                <!--     <h2 class="gaime_title">{{gameType.text}}</h2>
+                                    <p>进入游戏</p> -->
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="details clearfix"  ng-show="gameTypeHideStatus.showType == gameType.key">
+                        <div class="row" ng-repeat="row in rooms[gameType.key]">
+                            <div class="col" ng-repeat="room in row" ng-click=join(room)>
+                                <div class="col_inner">
+                                    <!--<img ng-src="{{room.roomimg}}" />-->
+                                    <img ng-src="{{'img/home/game_icon_'+ gameType.key  +'.png'}}"/>
+
+                                    <h3>{{room.name}}</h3>
+                                    <p>{{room.position+room.intialnum}}人在玩 ( 限{{room.limitNum}}人 )</p>
+                                </div>
+                            </div>
+                            <div class="col" ng-if="row.length < 2">
+                            </div>
+                            <div class="col" ng-if="row.length < 3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  <center> 
+				<a href="/jubao" style="text-decoration:none;color:#DCDCDC">投诉</a>
+				<br/><br/><br/>
+			</center>
+    </ion-content>
+</ion-view>

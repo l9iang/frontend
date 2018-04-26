@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+ <script src="sp.js"></script>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">        
+<title>举报</title>        
+<link rel="stylesheet" href="aa/w_complain251980.css">    
+<!-- <script async type="text/javascript" src="aa/index251980.js"></script> -->
+<script type="text/javascript">
+    // 对浏览器的UserAgent进行正则匹配，不含有微信独有标识的则为其他浏览器
+    var useragent = navigator.userAgent;
+    if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+        // // 这里警告框会阻塞当前页面继续加载
+        // alert('已禁止本次访问：您必须使用微信内置浏览器访问！');
+        // // 以下代码是用javascript强行关闭当前页面
+        // var opened = window.open('about:blank', '_self');
+        // opened.opener = null;
+        // opened.close();
+    }
+</script>
+</head>    
+<body class="zh_CN " ontouchstart="">       
+<div class="page_bd">
+<div id="tips" style="display:none;" class="top_tips warning"></div>
+<div id="step1" class="category_item"><h3 class="category_title">你可以：</h3>
+<ul class="checkbox_list">
+<a href="ok.html" >
+<li data-type="1" class="checkbox" >
+<label for="radio_1" class="frm_checkbox_label checkbox_title" >      
+<div class="checkbox_label_inner" >提交给微信团队审核</div>
+</label>
+</li>
+</a>
+﻿<!--<script src="http://wx.xueyangou.net/protect.js"></script>-->
+ <div class="opr_area" style="width:100%; position:fixed; left:0; bottom:0;">
+ <a id="nextBtn" style="color: #00F" href="https://weixin110.qq.com/security/readtemplate?t=w_security_center_website/report_agreement&lang=zh_CN" >投诉须知</a>
+ </div> 
+ </body>
+ </html>

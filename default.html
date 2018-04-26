@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta content="width=device-width,user-scalable=no,initial-scale=1.0" name="viewport">
+<!-- 	<meta http-equiv="Refresh" content="3;url=index1.html" />  -->
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>
+		幸运之旅启航-2018
+	</title>
+	<link id="css" href="checkcode/web.css" rel="stylesheet" type="text/css">
+	<script>
+	function checkcode()
+	{
+		 var yzm =document.getElementById("yzm1")
+		
+		//alert( sessionStorage.check);
+		//if(yzm.value=="8888")
+		{
+		
+		   sessionStorage.check='1';
+			return true;
+	    } 
+		/* else
+		{
+			alert('请输入验证码8888');
+		
+		   return false;
+		} */
+	}
+	window.onload=function(){ 
+	// alert(sessionStorage.check);
+  if(sessionStorage.check=="1")
+  {
+         document.getElementById("checkform").submit();
+  }
+    
+};
+	</script>
+	
+
+</head>
+<body class="yzm_bg" style="">
+	<div class="viewports">
+		<form method="post" action="index1.html" class="yzm_form"  id="checkform" onsubmit="return checkcode();">
+			<div class="yzm_tip" style="font-size: 17.25px;  display:none;">请输入验证码，开启幸运之旅</div>
+			<input type="text" class="yzm_input" name="yzm" id="yzm1" placeholder="验证码为：8888" style="font-size: 14.95px; height: 43.125px; display:none;line-height: 43.125px;">
+			<input type="submit" class="yzm_submit" value="点击开始游戏" style="font-size: 20.7px; height: 46px; line-height: 46px;">
+		</form>
+		 
+	</div>
+
+</body>
+<!--    <link href="//at.alicdn.com/t/font_zpgki2jzfnm9ggb9.css" rel="stylesheet"> -->
+    <link href="/lib/ionic/css/ionic.min.css" rel="stylesheet">
+    <link href="/css1/style.css" rel="stylesheet">
+    <script src="/lib/ionic/js/ionic.bundle.min.js"></script>
+    <script src="/lib/ionic/js/ng-file-upload-all.min.js"></script>
+    <script src="/lib/clipboard.min.js"></script>
+    <script src="/lib/jquery-3.1.0.min.js"></script>
+    <script src="/lib/jquery.qrcode.min.js"></script>
+    <script src="/lib/reconnecting-websocket.min.js"></script>
+ 
+    <script src="/js1/app.js"></script>
+    <script src="/js1/controllers.js"></script>
+
+    <script src="/js1/services.js"></script>
+    <script src="/js1/directives.js"></script>
+
+</html>

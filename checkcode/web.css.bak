@@ -1,0 +1,78 @@
+/*以上为公共压缩样式，处理各个浏览器兼容性所写*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {
+    margin: 0;
+    padding: 0;
+}
+ul,ol {
+    list-style: none
+}
+img {
+    border: 0;
+    vertical-align:middle
+}
+ 
+.yzm_bg{
+	max-width:100%;
+	max-height:100%;
+	background:url(yzm_bg.jpg);
+	background-size: cover; 
+}
+.yzm_input{
+	height:45px;
+	line-height:45px;
+	border:2px solid #fff;
+	width:100%;
+	border-radius:8px;
+	font-size:20px;
+	margin:20px 0;
+	padding-left:10px;
+	background:#3C2625;
+	color:#fff;
+} 
+.viewports{
+  vertical-align:middle;
+   
+  	margin:50% auto;
+ 
+ width:100%;
+｝
+.yzm_form input:-moz-placeholder {   
+    color: #999999;  
+	font-family:"Microsoft YaHei";	
+} 
+.yzm_form input:-ms-input-placeholder {   
+    color: #999999;   
+	font-family:"Microsoft YaHei";
+}   
+.yzm_form input::-webkit-input-placeholder {   
+    color: #999999;  
+	font-family:"Microsoft YaHei";	
+}  
+
+.yzm_submit{
+	height:45px;
+	line-height:45px;
+	width:100%;
+	border-radius:5px;
+	color:#fff;
+	background:#2aac62;
+	font-size:22px;
+	border:none;
+	margin-top:10px;
+	font-family:"Microsoft YaHei";
+}
+.yzm_tip{
+	font-size:20px;
+	color:#fff;
+}
+.yzm_form{
+	margin:50% auto;
+	width:78%;
+}
+.yzm_bottom{
+	width:100%;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+ 

@@ -1,0 +1,28 @@
+<ion-view view-title="我的房间" need-login>
+    <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+        <ion-nav-back-button>返回</ion-nav-back-button>
+        <ion-nav-buttons side="secondary">
+            <button class="button button-clear" ui-sref="tab.create">创建房间</button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="padding no-room-tip" ng-if="!rooms || !rooms.length">
+            还没有房间，想要拥有自己的房间吗？<a ui-sref="tab.create" class="create">戳这里</a>
+        </div>
+        <ion-refresher pulling-text="下拉加载更多房间..." on-refresh="doRefresh()"></ion-refresher>
+        <ion-list>
+            <ion-item ng-repeat="room in rooms" class="item-thumbnail-left" ui-sref="tab.account-room-props({roomId:room.id})" >
+                <img ng-src="img/{{room.roomimg}}">
+                <h3 class="room-name">{{room.name}}</h3>
+                <p>
+                    <span>{{room.statusText}}</span>({{room.position}}/{{room.limitNum}}人在线)
+                </p>
+                <p>
+                    佣金累计 <strong style="color:red">{{room.sumFee|number:2}}</strong> <br>
+                </p>
+
+                <p>{{room.description}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

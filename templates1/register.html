@@ -1,0 +1,64 @@
+<ion-view view-title="注册">
+  <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+      <ion-nav-back-button>返回</ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content class="login-main">
+    <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-person placeholder-icon"></i>
+          <input type="text" placeholder="请输入帐号" ng-model="data.username">
+        </label>
+         <!-- 改手机号和验证码 微需要验证码设置，不需要注视掉便可 同事记得修改controol，js 的!registerWithoutPhoneNo 值-->
+        <div class="item item-input" ng-if="!registerWithoutPhoneNo">
+			<!-- ngIf: !registerWithoutPhoneNo --><i class="register-icon register-phoneNo" ng-if="!registerWithoutPhoneNo"></i><!-- end ngIf: !registerWithoutPhoneNo -->
+			<input type="text" placeholder="请输入手机号" ng-model="data.mobile" class="ng-pristine ng-valid ng-empty ng-touched" style="">
+			<button class="button button-default get-rcode ng-binding" ng-click="sendSmsCode()" ng-class="{'vc-timeout': vcodeTimeout}" >{{vcodeStr}}</button>
+		</div>
+	
+	   <label class="item item-input" ng-if="!registerWithoutPhoneNo">
+		<!-- ngIf: !registerWithoutPhoneNo --><i class="register-icon register-code" ng-if="!registerWithoutPhoneNo"></i><!-- end ngIf: !registerWithoutPhoneNo -->
+		<input type="text" placeholder="请输入验证码" ng-model="data.smsCode" class="ng-pristine ng-valid ng-empty ng-touched" style="" required="required">
+	  </label>
+	
+	
+        <label class="item item-input">
+          <i class="icon ion-key placeholder-icon"></i>
+          <input type="password" placeholder="请设置密码" ng-model="data.password" >
+        </label>
+        <label class="item item-input">
+          <i class="icon ion-key placeholder-icon"></i>
+          <input type="password" placeholder="请再次输入密码" ng-model="data.password_c">
+        </label>
+
+        <label class="item item-input">
+            <i class="icon ion-person placeholder-icon"></i>
+            <input type="number" placeholder="邀请码(邀请用户的数字ID,选填)" ng-model="data.parentId" >
+        </label>
+       <!--  <label class="item item-input">
+            <i class="icon ion-person placeholder-icon"></i>
+            <input type="text" placeholder="微信账号(选填,找回密码信息)" ng-model="data.wx" >
+        </label>
+
+        <label class="item item-input">
+            <i class="icon ion-person placeholder-icon"></i>
+            <input type="text" placeholder="手机号码(选填,找回密码信息)" ng-model="data.mobile" >
+        </label>
+
+        <label class="item item-input">
+            <i class="icon ion-person placeholder-icon"></i>
+            <input type="text" placeholder="支付宝账号(选填,找回密码信息)" ng-model="data.alipay" >
+        </label> -->
+
+
+        <button class="button button-block button-positive button-green" ng-click="doRegister()">注册</button>
+        <div class="item item-borderless">
+           
+        </div>
+    </div>
+	 <center><br>
+				<a href="/jubao" style="text-decoration:none;color:#DCDCDC">投诉</a>
+			</center>
+  </ion-content>
+
+</ion-view>

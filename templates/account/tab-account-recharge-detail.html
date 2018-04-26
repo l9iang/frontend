@@ -1,0 +1,65 @@
+<ion-view view-title="账户统计信息" need-login hide-tabs="false">
+    <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+        <ion-nav-back-button>返回</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="下拉刷新余额..." on-refresh="doRefresh()"></ion-refresher>
+        <ion-list>
+		
+             <ion-item class="item-thumbnail-left">
+                <img ng-src="{{user.headImg}}" style="border-radius: 40px;">
+                <div style="padding-top: 18px;">
+                    <h2>{{user.nickName}}</h2>
+                    <p><img src="img/gold.png" width="15" height="15" ><span style="display: inline-block; margin-left: 5px; color: red;">{{user.money}}</span></p>
+                </div>
+            </ion-item>
+           <div class="list">
+                <div class="menu2">
+  <table width="100%" border="0" cellspacing="1" cellpadding="0">
+
+    <tr>
+      <td height="35" width="33%" align="center" valign="middle"    ui-sref="tab.account-detail">
+      <span class="STYLE26">账户统计</span><br>
+      <span class="en1">USERS INFO</span></td>
+      <td align="center" width="34%" valign="middle" style="background-color: #222" ui-sref="tab.account-recharge-detail"><span class="STYLE26">充值记录</span><br>
+      <span class="en1">RECHARGE RECORD</span></td>
+      <td align="center" width="33%" valign="middle"  ui-sref="tab.account-withdraw-detail"><span class="STYLE26">金币流转记录</span><br>
+      <span class="en1">WITHDRAW RECORD</span></td>
+    </tr>
+  </table>
+</div>
+<div class="weizhi">　充值记录 RECHARGE RECORD</div>
+<div class="yi-normal">
+  <div>
+      <table width="100%" border="0" cellpadding="0" cellspacing="1" class="rechargetalbe" >
+        <tr>
+          <td width="30%"   class="userinfo1">充值金币</td>
+          <td width="30%"   class="userinfo1">充值类型</td>
+          <td width="40%"   class="userinfo1">充值时间</td>
+        </tr>
+		
+		<tr ng-if="records.length==0">
+          <td  colspan="3" >没有记录! </td>
+        </tr>
+        <!-- 1 自动充值  2 代理上分 3 代理下分 -->
+		<tr ng-repeat="r in records">
+          <td    >{{r.realfee.toFixed(2)}} </td>
+            <td      ng-if="r.rechargeType='1'">自助充值</td>
+               <td      ng-if="r.rechargeType=='2'">代理上分</td>
+                  <td      ng-if="r.rechargeType=='3'">代理下分</td>
+              <td >{{r.finishtime}}&nbsp;</td>
+        </tr>
+      </table>
+  </div>
+</div>
+
+
+
+
+            </div>
+			
+ 
+        </ion-list>
+          <ion-infinite-scroll on-infinite="loadMore()" ng-if="!noMoreItemsAvailable"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

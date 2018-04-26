@@ -1,0 +1,42 @@
+<ion-view view-title="管理金币流转收款二维码">
+      <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+        <ion-nav-buttons>
+            <button class="button back-button buttons button-clear header-item" ui-sref="tab.account">
+               返回
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content scroll="true" overflow-scroll="true">
+	  <div class="padding" style="background-color: #F1E9CF;color:#8E7525;margin: 1px;">
+           系统会自动为微信和支付宝收款二维码分配唯一代码，切勿修改。
+        </div>
+          <div class="qrcodelist">
+          
+          <div class="qrcodeitem">
+          <div class="imgtitle">
+            <img src="img/qr_wxpay.jpg"/></div>
+           <div class="imgsrc">
+            <img ng-src="{{wximgsrc}}"  ngf-select="uploadwx($file)" ng-model="file" name="file" ngf-pattern="'image/*'"
+                     ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                   >
+           
+           </div>
+          </div>
+          
+            <div class="qrcodeitem">
+          <div class="imgtitle">
+           <img src="img/qr_alipay.jpg"/>
+          </div>
+           <div class="imgsrc">
+            <img ng-src="{{zfbimgsrc}}"   ngf-select="uploadzfb($file)" ng-model="file" name="file" ngf-pattern="'image/*'"
+                     ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"  >
+           
+           </div>
+          </div>
+          
+          
+          
+          </div>
+    </ion-content>
+</ion-view>

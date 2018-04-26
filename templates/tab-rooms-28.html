@@ -1,0 +1,50 @@
+<ion-view>
+  
+  
+     <ion-header-bar align-title="center" class="bar-dark bar-header-black">
+        <div class="buttons">
+            <button class="button button-icon icon ion-arrow-left-c" ui-sref="tab.rooms" ></button>
+        </div>
+        <div class="title" ng-if="gt=='G03'">北京幸运28</div>
+         <div class="title" ng-if="gt=='G30'">加拿大28</div>
+        
+         <div class="buttons">            
+            <a class="button button-icon icon ion-android-contacts" ui-sref="tab.kf" title="联系客服"></a>
+        </div>
+        
+    </ion-header-bar>
+    
+    
+    <ion-content  >
+      <ion-refresher pulling-text="下拉加载更多房间..." on-refresh="doRefresh()"></ion-refresher> 
+     
+
+        <ion-list>
+            <ion-item ng-repeat="gameType in gameTypes" class="game-group"
+                      ng-if="gameType.key==gt">
+               
+                
+                
+                <div class="home-rooms" >
+                    <div class="room-row clearfix" ng-repeat="row in rooms[gameType.key]">
+                        <div class="home-room" ng-repeat="room in row" ng-click=join(room)>
+                            <div class="home-room-out">
+                                <div class="home-room-in">
+                                    <div class="room-name">
+                                    <img class="gameimg" ng-src="/img/{{room.roomimg}}"    ng-if="room.roomimg"  alt="" />
+                                                            <div class="roomtxt">  房间：{{room.name}}
+                                                                       
+                                                                 </div>      </div>
+                                    <div class="room-limit">
+                                        <div>在线人数:{{room.position}}人</div>
+                                        <div>限{{room.limitNum}}人</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

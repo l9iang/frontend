@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dic name="游戏类型">
+<item key="G011" text="接龙" icon="jl" css="meihua"/>
+<item key="G022" text="牛牛" icon="game-icon-2" css="niu"/>   
+<item key="G04" text="扫雷" icon="game-icon-1" css="zhadan" />     
+</dic>

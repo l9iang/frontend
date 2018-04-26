@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dic name="游戏类型">
+    <item key="G011" text="接龙" icon="jl" css="meihua"/>
+    <item key="G022" text="牛牛" icon="game-icon-2" css="niu"/>
+   
+    <item key="G04" text="扫雷" icon="game-icon-1" css="zhadan" />
+   
+     <item key="G42" text="多雷" icon="game-icon-1" css="zhadan" />
+    <item key="G43" text="禁枪雷" icon="game-icon-1" css="zhadan" />    
+    <item key="G45" text="坐庄雷" icon="game-icon-1" css="zhadan" />   
+    <item key="G46" text="连环禁抢雷" icon="game-icon-1" css="zhadan" />   
+     <item key="G03" text="北京28" icon="game-icon-1" css="xingyun"/>
+      <item key="G30" text="加拿大28" icon="game-icon-1" css="my" />
+</dic>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dic name="金币流转状态">
+    <item key="1" text="待审核"/>
+    <item key="2" text="金币流转成功"/>
+    <item key="9" text="金币流转失败"/>
+</dic>

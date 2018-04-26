@@ -1,0 +1,29 @@
+<ion-view view-title="邀请小伙伴" need-login>
+     <ion-nav-bar class="bar-positive bar-header-black" align-title="center">
+        <ion-nav-back-button>返回</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+
+        <div class="list list-inset" align="center">
+            <span style="color:grey;margin-left: 20px;">辣么好玩的游戏,赶紧转发给小伙伴吧~</span>
+            <div align="center"><img  src="{{user.invitImg}}"></div>
+           <!--  <label class="item item-input">
+                邀请： <input type="text" ng-model="user.url">
+            </label> -->
+        </div>
+
+        <ion-list>
+            <ion-item class="item-divider">获取二维码海报</ion-item>
+			<div align="center" >
+			<a  
+			
+			ui-sref="tab.promoteqrcode({qr:qr})" 
+			 style="text-decoration:none" ng-repeat="qr in qr_img"><img width="120" src="/img/qrcodebg/{{qr.img}}"/></a>
+			</div>
+ 
+         
+        </ion-list>
+
+      
+    </ion-content>
+</ion-view>

@@ -1,0 +1,92 @@
+
+<ion-view>
+<div class="l-head-{{$parent.platform}} l-back">
+	<ion-header-bar align-title="left" class="bar-positive">
+	<div class="home-nav l-back">
+                <div class="nav-buttons clearfix">
+                    <!--a class="button button-icon icon  help" href="http://www.baidu.com"></a-->
+                    <div class="home-title">
+						<i class="left i i-back" ui-sref="index"></i>
+                        <span>红包大厅 <b>{{gameTypesTitle}}</b></span>
+						<i class='rightText'><b ng-bind="onlineCount">0</b>人玩</i>
+                    </div>
+                    <!--a class="button button-icon icon ion-ios-help-outline new-room" ui-sref="kf"></a-->
+                </div>
+            </div>
+</ion-header-bar>
+
+    <ion-content class="l-back-f3">
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<div class="l-account-hear">
+			<img ng-src="{{user?user.headImg:'/img/avatar.png'}}"  class="img" ui-sref='tab.account'></img>
+		 
+		 
+            <div class="info">
+				<div class="j"> <i></i>{{user.money}}</div>  
+                <h1>{{user.nickName?user.nickName:"游客"}}</h1>
+            </div>
+			<div class="room">
+				<button class="button jia" ui-sref='tab.account-rooms' >我的房间</button>
+				<button class="button my" ng-click="enterRoom()">加入房间</button>
+			</div>
+		</div>
+		
+		<div class="l-home-type">
+			<div class="li li-{{ v.properties.css }}" ng-repeat="(key,v) in gametype" ng-class="{ {{key}}:'on' }[gameTypesTab]"  ng-click="gameTypeTab({{key}})">
+				<span>
+					<em class="l-flash"></em>
+					<i class="l-flash i i-{{ v.properties.css }}"></i>
+				</span>
+				<h1>{{ v.text }}</h1>
+			</div>
+		</div>
+		
+        <ion-list>
+            <ion-item ng-repeat="gameType in gameTypes" class="game-group"
+                      ng-if="rooms[gameType.key] && rooms[gameType.key].length">
+                <div class="home-rooms l-back-f3" ng-show="!gameTypeHideStatus[gameType.key]" >
+                    <div class="room-row clearfix" ng-repeat="row in rooms[gameType.key]">
+                        <div class="home-room item border0" ng-repeat="(k,room) in row" ng-click=join(room)>
+							<div class="home-room-hear" ng-if="room.type !== 'G03'">
+								<h1 ng-if="room.properties.conf_min_money">{{room.properties.conf_min_money}}-{{room.properties.conf_max_money}}金币</h1>
+								<h1 ng-if="room.properties.conf_money">{{room.properties.conf_money}}金币</h1>
+								<h2>{{room.name}}</h2>
+							</div>
+                            <div class="home-room-out">
+								<div class="home-room-img">
+									<img ng-src="img/home/{{room.type}}.png" ng-if="!room.roomimg">
+									<img ng-src="img/{{room.roomimg}}" ng-if="room.roomimg">
+								</div>
+								<div class="home-room-right">
+									<h1 class="nopwd" ng-if="room.needPsw == false">进入</h1>
+									<h1 class="pwd" ng-if="room.needPsw == true">密码</h1>
+								</div>
+								<div class="home-room-in">
+									<div class="room-limit">
+										<b ng-if="room.type=='G03'">{{room.name}}</b>
+										<span class="l-color" ng-if="room.properties.conf_rate">{{room.properties.conf_rate}}倍赔付</span> 
+										<span class="l-color" ng-if="room.properties.conf_looser == 'min'">抢小发包</span> 
+										<span class="l-color" ng-if="room.properties.conf_looser == 'max'">抢大发包</span>
+										<span ng-if="room.properties.conf_min_size">
+											最多{{room.properties.conf_max_size}}个包
+										</span>
+										<span ng-if="room.properties.conf_size">
+											每次{{room.properties.conf_size}}<span ng-if="room.properties.conf_max_size">-{{room.properties.conf_max_size}}</span>个包
+										</span>
+										
+									</div>
+									<div class="room-limit">当前{{room.position+room.intialnum}}人 限{{room.limitNum}}人</div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</div>
+</ion-view>
+	
+
+
+
