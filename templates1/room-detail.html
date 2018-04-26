@@ -97,10 +97,8 @@
     <ion-footer-bar keyboard-attach ng-class="{'kb-open': emojiOpen}">
         <div class="buttons">
             <button class="button button-icon icon ion-arrow-left-c" ng-click="back()"></button>
-
-            </button>
         </div>
-        <div class="title msg-input" style="right: 98px; left: 58px;}">
+        <div class="title msg-input" style="right: 40px; left: 33px;">
             <input id="chatMsgInput" class="chat-input" ng-model="content" ng-click="closeEmojiBoard($event)"
                    ng-keydown="keyEnter($event)">
         </div>
@@ -108,7 +106,7 @@
             <!--<button class="button button-icon icon ion-happy-outline" ng-click="toggleEmojiBoard()"-->
              <!--ng-disabled="user.id == null || user.id == undefined"></button>-->
             <button class="button button-icon icon ion-paper-airplane" ng-click="send()"></button>
-            <button class="button button-icon icon ion-ios-plus-outline" ng-click="openModal($event)">
+            <button class="button button-icon icon ion-ios-plus-outline" ng-click="openModal($event)"></button>
         </div>
     </ion-footer-bar>
     <div class="emoji-board" ng-class="{'kb-close': !emojiOpen}">

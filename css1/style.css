@@ -12,7 +12,7 @@ body.platform-ready {
 .qrcodelist
 {
 	width:100%;
-	
+
 	   text-align: center;
 }
 .qrcodeitem
@@ -28,7 +28,7 @@ body.platform-ready {
 {
 	max-width:98%;
 	height:auto;
-	
+
 }
 .l-account-hear .img {
 	width: 80px;
@@ -41,32 +41,32 @@ body.platform-ready {
 .l-account-hear img
 {
     vertical-align: middle;
-	
-	
+
+
 }
 .l-account-hear .left{
-	
+
     width: 33.333333%;
     float: left;
-   
+
 	vertical-align:middle;
 	margin: 0;
 	padding: 0;
 	padding-left:15px;
    height: 100px;
-   
+
    padding-top: 10px;
 }
 .l-account-hear .left div{
-	
+
 	line-height: 30px;
-	 
+
 }
 .l-account-hear .mid{
 	     width: 33.333333%;
     float: left;
     text-align: center;
-  
+
 		margin: 0;
 	padding: 0;
 	 height: 100px;
@@ -77,21 +77,21 @@ body.platform-ready {
     float: left;
     text-align: left;
     padding-left:10px;
-    
+
     height: 100px;
-	
+
 }
 .l-account-hear .right div{
-	
+
 	line-height: 30px;
-	 
+
 }
 .qrcodeitem .imgtitle
 {
 	margin-top:10px;
 	font-weight:600;
 	text-align:center;
-	
+
 }
 .qrcodeitem .imgsrc
 {
@@ -186,7 +186,7 @@ body.platform-ready {
     width: 100%;
     margin: 0 auto;
     overflow: hidden;
-    
+
 }
 
 .home-cover .wrapper .marquee {
@@ -2236,6 +2236,7 @@ body.platform-ready {
     width: 100%;
     word-wrap: normal;
     text-overflow: ellipsis;
+    white-space:nowrap;
 }
 
 .room-owner {
@@ -3310,31 +3311,31 @@ background-color:#D33718;
 }
 .userinfotable  tr td{
 	vertical-align: middle!important;
-	
+
 	height: 35px;
-	
+
 	width: 50%;
-	
+
 	padding: 0;
-	
+
 	border:1px solid #ddd;
-	
+
 	text-align: center;
-	
+
 }
 .withdrawtable  tr td{
 	vertical-align: middle!important;
-	
+
 	height: 35px;
-	
-	
-	
+
+
+
 	padding: 0;
-	
+
 	border:1px solid #ddd;
-	
+
 	text-align: center;
-	
+
 }
 
 .accinfo2 {
@@ -3349,7 +3350,7 @@ background-color:#D33718;
 	text-align: center;
 	vertical-align: middle;
 }
- 
+
 .weizhi {
 	line-height: 30px;
 	background-color: #222;
@@ -3410,9 +3411,9 @@ background-color:#D33718;
 	padding-top: -5px;
 }
 .l-account-hear {
- 	 
+
      height: 120px;
-    
+
     padding-top: 20px;
     padding-bottom: 10px;
     font-weight:700;
