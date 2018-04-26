@@ -3104,13 +3104,13 @@ angular.module('starter.controllers', [])
         });
         $scope.payOrder = {};
         var icons = myConstants.IS_APP ? {
-            1001: 'ali.png',
+            // 1001: 'ali.png',
             1002: 'wx.png',
-            1003: 'qqwap.png'
+            // 1003: 'qqwap.png'
         } : {
-            1001: 'ali.png',
+            // 1001: 'ali.png',
             1002: 'wx.png',
-            1003: 'qqwap.png'
+            // 1003: 'qqwap.png'
         };
         var buttons = [];
         for (var i = 0; i < Pay.payChannels.length; i++) {
@@ -3143,7 +3143,6 @@ angular.module('starter.controllers', [])
                                 function (res) {
 
                                     if (res.code == 200) {
-
                                         //   $state.go('tab.submitpay',{paysrc: res.body});
                                         $window.location.href = res.body;
 
